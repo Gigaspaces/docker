@@ -13,7 +13,7 @@ XAP provides the following advantages:
 - Gives you fast data access by storing ALL your data in-memory. It also ensures high availability with in-memory backup within each container.
 - Scales your app automatically and on demand.
 
-To learn more about GigaSpaces products, visit the [website](gigaspaces.com).
+To learn more about GigaSpaces products, visit the [website](https://www.gigaspaces.com).
 
 ***
 
