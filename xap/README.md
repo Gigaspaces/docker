@@ -1,6 +1,6 @@
 ##  XAP In-Memory Data Grid
 
-![XAP logo](https://docs-staging.gigaspaces.com/images/logo-xap-color-small.png)
+![XAP logo](https://docs.gigaspaces.com/images/logo-xap-color-small.png)
 
 ## What is XAP?
 
