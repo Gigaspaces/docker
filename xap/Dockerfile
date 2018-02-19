@@ -4,8 +4,8 @@ FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ENV GS_HOME /opt/gigaspaces
 # Download
 ARG GS_VERSION=12.3.0
-ARG GS_MILESTONE=m17
-ARG GS_BUILD=18917
+ARG GS_MILESTONE=m18
+ARG GS_BUILD=18918
 ARG GS_NAME=gigaspaces-xap-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
 ADD https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/${GS_VERSION}/${GS_VERSION}-${GS_MILESTONE}/${GS_NAME}.zip /tmp/gigaspaces.zip
 # Unzip and delete zip
