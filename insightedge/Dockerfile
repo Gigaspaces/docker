@@ -6,8 +6,8 @@ ENV GS_HOME /opt/gigaspaces
 ARG GS_VERSION=12.3.0
 ARG GS_MILESTONE=m18
 ARG GS_BUILD=18918
-ARG GS_NAME=gigaspaces-xap-open-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
-ADD https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${GS_VERSION}/${GS_VERSION}-${GS_MILESTONE}/${GS_NAME}.zip /tmp/gigaspaces.zip
+ARG GS_NAME=gigaspaces-insightedge-open-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
+ADD https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${GS_VERSION}/${GS_VERSION}-${GS_MILESTONE}/${GS_NAME}.zip /tmp/gigaspaces.zip
 # Unzip and delete zip
 RUN unzip -q /tmp/gigaspaces.zip -d /tmp && \
     mv /tmp/${GS_NAME} ${GS_HOME} && \
