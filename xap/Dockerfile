@@ -13,6 +13,14 @@ RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     mv /tmp/${GS_NAME} ${GS_HOME} && \
     rm -f /tmp/gigaspaces.zip
 WORKDIR ${GS_HOME}
+# Configure and expose ports
 ENV XAP_NIC_ADDRESS "#eth0:ip#"
-ENTRYPOINT ["bin/xap"]
-CMD ["--help"]
+ENV XAP_LOOKUP_PORT 4174
+ENV XAP_LRMI_PORT 8200-8300
+EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT}
+# TODO: Enhance code to detect env vars in addition to system props to avoid this line
+ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT}"
+# TODO: Replace with ENTRYPOINT ["bin/xap"] and CMD ["space", "run"]
+ENTRYPOINT ["bin/space-instance.sh"]
+# TODO: Verify works with docker run --net=host (linux only)
+# TODO: Verify outside client (e.g. gs-ui or benchmark) can connect with dockerized space
