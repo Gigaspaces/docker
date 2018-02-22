@@ -2,8 +2,8 @@ ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_VERSION=12.3.0
-ARG GS_MILESTONE=m18
-ARG GS_BUILD=18918
+ARG GS_MILESTONE=m20
+ARG GS_BUILD=18920
 ARG GS_NAME=gigaspaces-xap-open-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${GS_VERSION}/${GS_VERSION}-${GS_MILESTONE}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
