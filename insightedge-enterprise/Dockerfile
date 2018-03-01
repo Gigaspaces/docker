@@ -2,8 +2,8 @@ ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_VERSION=12.3.0
-ARG GS_MILESTONE=m20
-ARG GS_BUILD=18920
+ARG GS_MILESTONE=m21
+ARG GS_BUILD=18921
 ARG GS_NAME=gigaspaces-insightedge-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${GS_VERSION}/${GS_VERSION}-${GS_MILESTONE}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
@@ -32,6 +32,3 @@ RUN chmod 777 bin/xap
 # TODO: replace bin/xap with bin/insightedge once implemented
 ENTRYPOINT ["bin/xap"]
 CMD ["host", "run-agent", "--auto"]
-# TODO: Verify works with docker run --net=host (linux only)
-# TODO: Verify outside client (e.g. gs-ui or benchmark) can connect with dockerized space
-# TODO: Verify can submit job from host to spark/ie running in docker
