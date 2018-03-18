@@ -19,14 +19,11 @@ ENV XAP_NIC_ADDRESS "#eth0:ip#"
 ENV XAP_LOOKUP_PORT 4174
 ENV XAP_LRMI_PORT 8200-8300
 ENV XAP_MANAGER_REST_PORT 8090
-# TODO: Consider renaming WEBUI_PORT => XAP_WEBUI_PORT (see webui launcher)
 ENV WEBUI_PORT 8099
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_MASTER_WEBUI_PORT 8080
-# TODO: Should we expose SPARK_WORKER_WEBUI_PORT as well (e.g. for ui/troubleshooting)?
 ENV ZEPPELIN_PORT 9090
 EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT} ${XAP_MANAGER_REST_PORT} ${WEBUI_PORT} ${SPARK_MASTER_PORT} ${SPARK_MASTER_WEBUI_PORT} ${ZEPPELIN_PORT}
-# TODO: Enhance code to detect env vars in addition to system props to avoid this line
 ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT}"
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["host", "run-agent", "--auto"]

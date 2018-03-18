@@ -19,10 +19,8 @@ ENV XAP_NIC_ADDRESS "#eth0:ip#"
 ENV XAP_LOOKUP_PORT 4174
 ENV XAP_LRMI_PORT 8200-8300
 ENV XAP_MANAGER_REST_PORT 8090
-# TODO: Consider renaming WEBUI_PORT => XAP_WEBUI_PORT (see webui launcher)
 ENV WEBUI_PORT 8099
 EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT} ${WEBUI_PORT} ${XAP_MANAGER_REST_PORT}
-# TODO: Enhance code to detect env vars in addition to system props to avoid this line
 ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT}"
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["host", "run-agent", "--auto"]
