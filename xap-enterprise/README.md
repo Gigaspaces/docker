@@ -27,7 +27,7 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [Beyond the Basics](#beyond-the-basics)
     - [Running Other CLI Commands](#running-other-cli-commands)
     - [Using a Different Java Version](#using-a-different-java-version)
-    - [Accessing the Logs](#accessing-the-xap-logs)
+    - [Accessing the Logs](#accessing-the-logs)
 
 # Getting Started
 

@@ -27,7 +27,7 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [Beyond the Basics](#beyond-the-basics)
     - [Running Other CLI Commands](#running-other-cli-commands)
     - [Using a Different Java Version](#using-a-different-java-version)
-    - [Accessing the Logs](#accessing-the-xap-logs)
+    - [Accessing the Logs](#accessing-the-logs)
 
 # Getting Started
 
@@ -72,11 +72,6 @@ When running the XAP Docker image without arguments, a host is automatically sta
 
 By default, Docker containers run in an isolated network, using port mapping to communicate with external services and clients. While this has advantages, it reduces performance as it requires an additional network hop. As per Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network. This means you can't run more than one container per host, but for production environments this isn't a limitation, as there's no need to run more than one container.
 
-For this scenario, let's assume there are 5 hosts named `test1`..`test5`, similar to the previous example.  On each host, run the following:
-```
-XAP_MANAGER_SERVERS=host1,host2,host3
-docker run --name test -it --net=host -e XAP_MANAGER_SERVERS gigaspaces/xap
-```
 ## Beyond the Basics
 
 # Running Other CLI Commands
