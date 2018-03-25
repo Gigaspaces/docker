@@ -5,7 +5,7 @@ ARG GS_VERSION=12.3.0
 ARG GS_MILESTONE=ga
 ARG GS_BUILD=19000
 ARG GS_NAME=gigaspaces-insightedge-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
-ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${GS_VERSION}/${GS_VERSION}-${GS_MILESTONE}/${GS_NAME}.zip
+ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${GS_VERSION}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 # Download $GS_URL and unzip to $GS_HOME
 RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
