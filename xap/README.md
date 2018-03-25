@@ -9,8 +9,8 @@ XAP is a cloud-native, high-throughput and low-latency application fabric that e
 
 XAP provides the following advantages:
 
-- Enables your entire app to run entirely on a single platform with all the tiers collapsed into one container.
-- Gives you fast data access by storing ALL your data in-memory. It also ensures high availability with in-memory backup within each container.
+- Enables your complete app to run in its entirety on a single platform, with all the tiers collapsed into one container.
+- Gives you fast data access by storing ALL your data in-memory, and ensures high availability using in-memory backup within each container.
 - Scales your app automatically and on demand.
 
 To learn more about GigaSpaces products, visit the [website](https://www.gigaspaces.com).
@@ -25,7 +25,7 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [Running a Test Cluster on Your Host](#running-a-test-cluster-on-your-host)
 - [Running a Production Cluster on Multiple Hosts](#running-a-production-cluster-on-multiple-hosts)
 - [Beyond the Basics](#beyond-the-basics)
-    - [Running other CLI commands](#running-other-cli-commands)
+    - [Running Other CLI Commands](#running-other-cli-commands)
     - [Using a Different Java Version](#using-a-different-java-version)
     - [Accessing the Logs](#accessing-the-xap-logs)
 
@@ -46,7 +46,7 @@ docker run gigaspaces/xap version
 
 # How to Use this Image
 
-The XAP Docker image utilizes GigaSpaces' XAP command line interface (CLI). To learn more about the command line interface, see [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The XAP Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 
@@ -61,16 +61,16 @@ docker run --name test -it --net=host gigaspaces/xap
 ```
 
 
-When running the XAP Docker image without arguments, a host is automatically started in demo mode, with a lookup service and a space called `demo-space` comprised of 2 partitions. In order for a client to connect to this space, you can use one of the following:
+When running the XAP Docker image without arguments, a host is automatically started in demo mode, with a lookup service and a Space called `demo-space` comprised of 2 partitions. In order for a client to connect to this Space, you can use one of the following:
 
-* Run the client in docker as well on the same host, using the `pu run` command line.
-* Use the `--net=host` option - docker will run the container on the same host as the network (works only on linux hosts)
-* configure the client lookup settings to the docker bridge network (172.17.0.x).
+* Run the client in Docker as well on the same host, using the `pu run` command line.
+* Use the `--net=host` option - Docker will run the container on the same host as the network (works only on Linux hosts).
+* Configure the client lookup settings to the Docker bridge network (172.17.0.x).
 
 
 # Running a Production Cluster on Multiple Hosts
 
-By default, docker containers run in an isolated network,using port mapping to communicate with external services and clients. While this has advantages, it reduces performance as it incurs an additional network hop. As per Docker documentation, to get optimal performance it's recommended to use the `--net=host` option, which uses the host network. This means you cannot run more than one container per host, but for production environments this is not a limitation, as there's no need to run more than one container.
+By default, Docker containers run in an isolated network, using port mapping to communicate with external services and clients. While this has advantages, it reduces performance as it requires an additional network hop. As per Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network. This means you can't run more than one container per host, but for production environments this isn't a limitation, as there's no need to run more than one container.
 
 For this scenario, let's assume there are 5 hosts named `test1`..`test5`, similar to the previous example.  On each host, run the following:
 ```
@@ -79,13 +79,13 @@ docker run --name test -it --net=host -e XAP_MANAGER_SERVERS gigaspaces/xap
 ```
 ## Beyond the Basics
 
-# Running other CLI commands
+# Running Other CLI Commands
 
-The XAP Docker image utilizes GigaSpaces' XAP command line interface (CLI). Any arguments following the image name are passed to the command line. 
+The XAP Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line. 
 
 If no arguments are specified after the image, the default command will be run: `demo`
 
-To learn more about the command line interface, see [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 # Using a Different Java Version
