@@ -95,7 +95,7 @@ You can also build from a different base image, or even create your own, using t
 
 #  Accessing the Logs
 
-All logs are stored in `opt/gigaspaces/logs` within the container. To access to the logs, you can do one of the following:
+All logs are stored in `opt/gigaspaces/logs` within the container. To access the logs, you can do one of the following:
 
 - Use the `-v` option in your `docker run` command to map this to a folder on your host.
 - Use the `docker cp` command to copy the files from a Docker instance to a location on your host.

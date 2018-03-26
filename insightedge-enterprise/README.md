@@ -1,4 +1,4 @@
-##  InsightEdge platform
+##  InsightEdge Enterprise
 
 ![InsightEdge logo](https://www.gigaspaces.com/sites/default/files/solutions/logo-insightedge-color-small.png)
 
@@ -60,8 +60,8 @@ When running the InsightEdge Enterprise Docker image without arguments, a host i
 
 * XAP Manager (mapped to port `8090`) [Learn more](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager.html)
 * Web Management Console (mapped to port `8099`) [Learn more](https://docs.gigaspaces.com/xap/12.3/admin/tools-web-ui.html)
-* Spark Master (mapped to port `8080`)
-* Spark Worker (mapped to port `8081`)
+* Spark master (mapped to port `8080`)
+* Spark worker (mapped to port `8081`)
 * Apache Zeppelin (mapped to port `9090`)
 
 In order for a client to connect to these services, you can use one of the following:
@@ -124,7 +124,7 @@ You can also build from a different base image, or even create your own, using t
 
 #  Accessing the Logs
 
-All logs are stored in `opt/gigaspaces/logs` within the container. To access to the logs, you can do one of the following:
+All logs are stored in `opt/gigaspaces/logs` within the container. To access the logs, you can do one of the following:
 
 - Use the `-v` option in your `docker run` command to map this to a folder on your host.
 - Use the `docker cp` command to copy the files from a Docker instance to a location on your host.

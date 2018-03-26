@@ -56,10 +56,10 @@ docker run --name test -it --net=host gigaspaces/insightedge
 ```
 
 
-When running the InsightEdge Docker image without arguments, a host is automatically started in demo mode, with a lookup service and a Space called `demo-space` comprised of 2 partitions. In addition, it starts a Spark Master, Spark Worker and Apache Zeppelin. In order for a client to connect to these services, you can use one of the following:
+When running the InsightEdge Docker image without arguments, a host is automatically started in demo mode, with a lookup service and a Space called `demo-space` comprised of 2 partitions. In addition, it starts a Spark master, Spark worker and Apache Zeppelin. In order for a client to connect to these services, you can use one of the following:
 
 * Run the client in Docker as well on the same host.
-* Use the `--net=host` option - Docker will run the container on the same host as the network (works only on Linux hosts).
+* Use the `--net=host` option; Docker will run the container on the same host as the network (works only on Linux hosts).
 * Configure the client lookup settings to the Docker bridge network (172.17.0.x).
 * Use `-p` to map the ports from the container to the host.
 
@@ -91,7 +91,7 @@ You can also build from a different base image, or even create your own, using t
 
 #  Accessing the Logs
 
-All logs are stored in `opt/gigaspaces/logs` within the container. To access to the logs, you can do one of the following:
+All logs are stored in `opt/gigaspaces/logs` within the container. To access the logs, you can do one of the following:
 
 - Use the `-v` option in your `docker run` command to map this to a folder on your host.
 - Use the `docker cp` command to copy the files from a Docker instance to a location on your host.
