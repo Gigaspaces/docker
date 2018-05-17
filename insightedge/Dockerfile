@@ -1,11 +1,12 @@
 ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
-ARG GS_VERSION=12.3.0
-ARG GS_MILESTONE=ga
-ARG GS_BUILD=19000
-ARG GS_NAME=gigaspaces-insightedge-open-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
-ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${GS_VERSION}/${GS_VERSION}/${GS_NAME}.zip
+ARG GS_product=insightedge
+ARG GS_VERSION=12.3.1
+ARG GS_MILESTONE=m4
+ARG GS_BUILD=19204
+ARG GS_NAME=gigaspaces-${GS_PRODUCT}-open-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
+ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 # Download $GS_URL and unzip to $GS_HOME
 RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
