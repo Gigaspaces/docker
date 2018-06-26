@@ -9,10 +9,10 @@ ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_VERSION}-${GS_MILESTONE}-b$
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 # Download $GS_URL and unzip to $GS_HOME
-RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
-    unzip -q /tmp/gigaspaces.zip -d /tmp && \
+RUN wget --progress=bar:force -O /tmp/gigaspaces-insightedge.zip ${GS_URL} &&\
+    unzip -q /tmp/gigaspaces-insightedge.zip -d /tmp && \
     mv /tmp/${GS_NAME} ${GS_HOME} && \
-    rm -f /tmp/gigaspaces.zip
+    rm -f /tmp/gigaspaces-insightedge.zip
 WORKDIR ${GS_HOME}
 ADD entrypoint.sh /opt/entrypoint.sh
 # Configure and expose ports
@@ -21,10 +21,17 @@ ENV XAP_LOOKUP_PORT 4174
 ENV XAP_LRMI_PORT 8200-8300
 ENV XAP_MANAGER_REST_PORT 8090
 ENV WEBUI_PORT 8099
+ENV WEBSTER_HTTP_PORT 8250
+ENV JMX_REGISTRY_PORT 10098
+##can't overwrite zookeeper_client_port
+ENV ZOOKEEPER_CLIENT_PORT 2181
+ENV MANAGER_ZOOKEEPER_DISCOVERY_PORT=2888
+ENV MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_MASTER_WEBUI_PORT 8080
 ENV ZEPPELIN_PORT 9090
-EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT} ${XAP_MANAGER_REST_PORT} ${WEBUI_PORT} ${SPARK_MASTER_PORT} ${SPARK_MASTER_WEBUI_PORT} ${ZEPPELIN_PORT}
-ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT}"
+
+EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT} ${WEBUI_PORT} ${XAP_MANAGER_REST_PORT} ${WEBSTER_HTTP_PORT} ${JMX_REGISTRY_PORT} ${ZOOKEEPER_CLIENT_PORT} ${SPARK_MASTER_PORT} ${SPARK_MASTER_WEBUI_PORT} ${ZEPPELIN_PORT}
+ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT} -Dcom.gs.manager.rest.port=${XAP_MANAGER_REST_PORT} -Dorg.openspaces.launcher.port=${WEBUI_PORT} -Dcom.gigaspaces.start.httpPort=${WEBSTER_HTTP_PORT} -Dcom.gigaspaces.start.rmi.registryPort=${JMX_REGISTRY_PORT}  -Dcom.gs.manager.zookeeper.discovery.port=${MANAGER_ZOOKEEPER_DISCOVERY_PORT} -Dcom.gs.manager.zookeeper.leader-election.port=${MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT}"
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["host", "run-agent", "--auto"]
