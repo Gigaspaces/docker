@@ -19,7 +19,9 @@ ADD entrypoint.sh /opt/entrypoint.sh
 ENV XAP_NIC_ADDRESS "#eth0:ip#"
 ENV XAP_LOOKUP_PORT 4174
 ENV XAP_LRMI_PORT 8200-8300
-EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT}
-ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT}"
+ENV XAP_RMI_REGISTRY_PORT 10098
+EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT} ${XAP_RMI_REGISTRY_PORT}
+ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT} -Dcom.gigaspaces.start.rmi.registryPort=${XAP_RMI_REGISTRY_PORT}"
+
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["demo"]
