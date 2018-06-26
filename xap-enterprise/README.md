@@ -89,9 +89,35 @@ Due to starting multiple management containers on the same host, the ports of th
 By default, Docker containers run in an isolated network, using port mapping to communicate with external services and clients. While this has advantages, it reduces performance because it requires an additional network hop. As per Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network. This means you can't run more than one container per host, but for production environments this isn't a limitation, because there's no need to run more than one container.
 
 For this scenario, let's assume there are 5 hosts named `test1`..`test5`, similar to the previous example.  On each host, run the following:
+
+__Required attributes__
 ```
 XAP_MANAGER_SERVERS=host1,host2,host3
+XAP_PUBLIC_HOST=<machine public ip>
 XAP_LICENSE=tryme
+```
+
+__Optional attributes the written values are default, you can overwrite it.__
+```
+XAP_LOOKUP_PORT=4174
+XAP_LRMI_PORT=8200-8300
+XAP_MANAGER_REST_PORT=8090
+WEBUI_PORT=8099
+XAP_WEBSTER_HTTP_PORT=8200
+XAP_RMI_REGISTRY_PORT=10098
+XAP_RMI_REGISTRY_RETRIES 35323
+
+XAP_ZOOKEEPER_CLIENT_PORT=2181
+XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT=2888
+XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
+```
+__Run with private/public ip and port forwarding (use above configuration)__
+```
+
+docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> -e XAP_MANAGER_SERVERS=host1,host2,host3 -e XAP_LICENSE=<tryme> -p 4174:4174 -p 8200-8300:8200-8300 -p 8090:8090 -p 8099:8099 -p 10098:10098 -p 35323:35323 -p 2181:2181 -p 2888:2888 -p 3888:3888 gigaspaces/xap-enterprise
+```
+__Run with --net=host__
+```
 docker run --name test -it --net=host -e XAP_LICENSE -e XAP_MANAGER_SERVERS gigaspaces/xap-enterprise
 ```
 ## Beyond the Basics
