@@ -21,14 +21,14 @@ ENV XAP_LOOKUP_PORT 4174
 ENV XAP_LRMI_PORT 8200-8300
 ENV XAP_MANAGER_REST_PORT 8090
 ENV WEBUI_PORT 8099
-ENV WEBSTER_HTTP_PORT 8250
-ENV JMX_REGISTRY_PORT 10098
+ENV XAP_WEBSTER_HTTP_PORT 8250
+ENV XAP_RMI_REGISTRY_PORT 10098
 ##can't overwrite zookeeper_client_port
-ENV ZOOKEEPER_CLIENT_PORT 2181
-ENV MANAGER_ZOOKEEPER_DISCOVERY_PORT=2888
-ENV MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
+ENV XAP_ZOOKEEPER_CLIENT_PORT 2181
+ENV XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT=2888
+ENV XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
 
-EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT} ${WEBUI_PORT} ${XAP_MANAGER_REST_PORT} ${WEBSTER_HTTP_PORT} ${JMX_REGISTRY_PORT} ${ZOOKEEPER_CLIENT_PORT}
-ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT} -Dcom.gs.manager.rest.port=${XAP_MANAGER_REST_PORT} -Dorg.openspaces.launcher.port=${WEBUI_PORT} -Dcom.gigaspaces.start.httpPort=${WEBSTER_HTTP_PORT} -Dcom.gigaspaces.start.rmi.registryPort=${JMX_REGISTRY_PORT}  -Dcom.gs.manager.zookeeper.discovery.port=${MANAGER_ZOOKEEPER_DISCOVERY_PORT} -Dcom.gs.manager.zookeeper.leader-election.port=${MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT}"
+EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT} ${WEBUI_PORT} ${XAP_MANAGER_REST_PORT} ${XAP_WEBSTER_HTTP_PORT} ${XAP_RMI_REGISTRY_PORT} ${XAP_ZOOKEEPER_CLIENT_PORT}
+ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT} -Dcom.gs.manager.rest.port=${XAP_MANAGER_REST_PORT} -Dorg.openspaces.launcher.port=${WEBUI_PORT} -Dcom.gigaspaces.start.httpPort=${XAP_WEBSTER_HTTP_PORT} -Dcom.gigaspaces.start.rmi.registryPort=${XAP_RMI_REGISTRY_PORT}  -Dcom.gs.manager.zookeeper.discovery.port=${XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT} -Dcom.gs.manager.zookeeper.leader-election.port=${XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT}"
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["host", "run-agent", "--auto"]
