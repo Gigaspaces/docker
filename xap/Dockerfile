@@ -3,8 +3,8 @@ ARG JAVA_TAG=8
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=xap
 ARG GS_VERSION=12.3.1
-ARG GS_MILESTONE=rc1
-ARG GS_BUILD=19209
+ARG GS_MILESTONE=rc2
+ARG GS_BUILD=19212
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
@@ -19,7 +19,12 @@ ADD entrypoint.sh /opt/entrypoint.sh
 ENV XAP_NIC_ADDRESS "#eth0:ip#"
 ENV XAP_LOOKUP_PORT 4174
 ENV XAP_LRMI_PORT 8200-8300
-EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT}
-ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT}"
+ENV WEBUI_PORT 8099
+ENV XAP_WEBSTER_HTTP_PORT 8250
+ENV XAP_RMI_REGISTRY_PORT 10098
+
+EXPOSE ${XAP_LOOKUP_PORT} ${XAP_LRMI_PORT} ${WEBUI_PORT} ${WEBSTER_HTTP_PORT} ${XAP_RMI_REGISTRY_PORT}
+
+ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.gigaspaces.start.httpPort=${WEBSTER_HTTP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${XAP_LRMI_PORT} -Dcom.gigaspaces.system.registryPort=${JMX_REGISTRY_PORT}"
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["demo"]
