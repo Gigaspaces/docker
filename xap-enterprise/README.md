@@ -114,7 +114,7 @@ XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
 __Run with private/public ip and port forwarding (use above configuration)__
 ```
 
-docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> -e XAP_MANAGER_SERVERS=host1,host2,host3 -e XAP_LICENSE=<tryme> -p 4174:4174 -p 8200-8300:8200-8300 -p 8090:8090 -p 8099:8099 -p 8200:8200 -p 10098:10098 -p 35323:35323 -p 2181:2181 -p 2888:2888 -p 3888:3888 gigaspaces/xap-enterprise
+docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> -e XAP_MANAGER_SERVERS=host1,host2,host3 -e XAP_LICENSE=<tryme> -p 4174:4174 -p 8200-8300:8200-8300 -p 8090:8090 -p 8099:8099 -p 10098:10098 -p 35323:35323 -p 2181:2181 -p 2888:2888 -p 3888:3888 gigaspaces/xap-enterprise
 ```
 __Run with --net=host__
 ```
