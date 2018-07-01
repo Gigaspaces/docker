@@ -55,10 +55,18 @@ The XAP Docker image utilizes GigaSpaces' command line interface (CLI). To learn
 The simplest and fastest way to start working with XAP is to get a single instance up and running on your local machine.  After the instance is initiated, you can start to explore the various features and capabilities.
 
 To run a single host on your machine:
-
 ```
 docker run --name test -it --net=host gigaspaces/xap
 ```
+To run a single host on your machine with port mapping:
+you cal also overwrite any of the follwing ports:
+```
+XAP_LOOKUP_PORT 4174
+XAP_LRMI_PORT 8200-8300
+
+docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> --p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap
+```
+
 
 
 When running the XAP Docker image without arguments, a host is automatically started in demo mode, with a lookup service and a Space called `demo-space` comprised of 2 partitions. In order for a client to connect to this Space, you can use one of the following:

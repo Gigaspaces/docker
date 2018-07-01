@@ -55,6 +55,19 @@ To run a single host on your machine:
 docker run --name test -it --net=host gigaspaces/insightedge
 ```
 
+To run a single host on your machine with port mapping:
+you cal also overwrite any of the follwing ports:
+```
+XAP_LOOKUP_PORT 4174
+XAP_LRMI_PORT 8200-8300
+SPARK_MASTER_PORT 7077
+SPARK_MASTER_WEBUI_PORT 8080
+SPARK_MASTER_REST_PORT 6066
+ZEPPELIN_PORT 9090
+
+docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> --p 4174:4174 -p 8200-8300:8200-8300 -p 7077:7077 -p 8080:8080 -p 6066:6066 -p 9090:9090 gigaspaces/insightedge
+```
+
 
 When running the InsightEdge Docker image without arguments, a host is automatically started in demo mode, with a lookup service and a Space called `demo-space` comprised of 2 partitions. In addition, it starts a Spark master, Spark worker and Apache Zeppelin. In order for a client to connect to these services, you can use one of the following:
 
