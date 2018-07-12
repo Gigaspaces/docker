@@ -108,3 +108,4 @@ To copy logs from a running instance, use the following command:
 ```
 docker cp containerId:/opt/gigaspaces/logs .
 ```
+
