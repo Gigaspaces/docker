@@ -119,7 +119,7 @@ ZEPPELIN_PORT 9090
 __Run with private/public ip and port forwarding (use above configuration)__
 ```
 
-docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> -e XAP_MANAGER_SERVERS=host1,host2,host3 -e XAP_LICENSE=<tryme> -p 4174:4174 -p 8200-8300:8200-8300 -p 8090:8090 -p 8099:8099 -p 10098:10098 -p 2181:2181 -p 2888:2888 -p 3888:3888 -p 7077:7077 -p 8080:8080 -p 6066:6066 -p 9090:9090 gigaspaces/insightedge-enterprise
+docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> -e XAP_MANAGER_SERVERS=host1,host2,host3 -e XAP_LICENSE=<tryme> -p 4174:4174 -p 8199:8199 -p 8200-8300:8200-8300 -p 8090:8090 -p 8099:8099 -p 10098:10098 -p 2181:2181 -p 2888:2888 -p 3888:3888 -p 7077:7077 -p 8080:8080 -p 6066:6066 -p 9090:9090 gigaspaces/insightedge-enterprise
 ```
 __Run with --net=host__
 ```
@@ -149,9 +149,6 @@ docker build --build-arg JAVA_TAG=9 -t gigaspaces/insightedge-enterprise:openjdk
 If you're not sure which versions are available, refer to the [supported tags](https://hub.docker.com/r/library/openjdk/tags/) page.
 
 You can also build from a different base image, or even create your own, using the `JAVA_IMAGE` build argument (e.g. `--build-arg JAVA_IMAGE=...`)
-
-#  Insightedge-submit
-When running imsightedge-submit script you have to add XAP_NIC_ADDRESS=<your host ip>
 
 #  Accessing the Logs
 
