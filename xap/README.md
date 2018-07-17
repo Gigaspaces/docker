@@ -22,7 +22,6 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [Getting Started](#getting-started)
 - [How to Use this Image](#how-to-use-this-image)
 - [Running Your First Container](#running-your-first-container)
-- [Running a Test Cluster on Your Host](#running-a-test-cluster-on-your-host)
 - [Running a Production Cluster on Multiple Hosts](#running-a-production-cluster-on-multiple-hosts)
 - [Beyond the Basics](#beyond-the-basics)
     - [Running Other CLI Commands](#running-other-cli-commands)
@@ -54,31 +53,55 @@ The XAP Docker image utilizes GigaSpaces' command line interface (CLI). To learn
 
 The simplest and fastest way to start working with XAP is to get a single instance up and running on your local machine.  After the instance is initiated, you can start to explore the various features and capabilities.
 
-To run a single host on your machine:
+To run a demo on your machine:
 ```
-docker run --name test -it --net=host gigaspaces/xap
-```
-To run a single host on your machine with port mapping:
-you cal also overwrite any of the follwing ports:
-```
-XAP_LOOKUP_PORT 4174
-XAP_LRMI_PORT 8200-8300
-
-docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> --p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap
+docker run --name test -it gigaspaces/xap
 ```
 
+When running this image without arguments, it's automatically started in demo mode, with a lookup service and a Space called `demo-space` comprised of 2 partitions. 
 
+Since docker runs containers in a bridge network by default, a client that wants to connect to this Space should use one of the following options:
 
-When running the XAP Docker image without arguments, a host is automatically started in demo mode, with a lookup service and a Space called `demo-space` comprised of 2 partitions. In order for a client to connect to this Space, you can use one of the following:
+### Run client with Docker Bridge Network
 
-* Run the client in Docker as well on the same host, using the `pu run` command line.
-* Use the `--net=host` option - Docker will run the container on the same host as the network (works only on Linux hosts).
-* Configure the client lookup settings to the Docker bridge network (172.17.0.x).
+By default, the client uses the host network interface. You can configure the client to use the docker bridge network interface (usually 172.17.0.x) using the `XAP_NIC_ADDRESS` environment variable, so it'll be able to contact and interact with the space.
 
+* Note: This works only for clients on the same host - the docker bridge network is inaccessible to other hosts.
+
+### Run client in another docker container
+
+Docker containers on the same host use the same bridge network. If the client is a processing unit, you can run it via another docker container with the `pu run` command.
+
+* Note: This works only for clients on the same host - docker containers on other hosts will use a different bridge network.
+
+### Use the Host Network
+
+Docker can run containers on the host network using the `--net=host` option with the `docker run` command. In this case, the client will be able to connect and interact with the space without additional configuration.
+
+* Note: Docker supports the `--net=host` option only on Linux hosts.
+
+### Configure XAP public host
+
+By default, XAP communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this and use the `XAP_PUBLIC_HOST` enviromnent variable to instruct XAP to publish itself using a different network address, e.g. the host's network address. In this case you'll also need to expose some ports from the docker container to the host. For example:
+
+```
+docker run --name test -it -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap
+```
+
+# Ports
+
+This image uses the ports described in the table below. You can change each port using the respective environment variable, or simply map it to a different port using the `-p` option in `docker run` (e.g. `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container).
+
+| Environment variable | Default value | Description |
+| ---------------------|---------------|-------------|
+| XAP_LOOKUP_PORT      | 4174          | Lookup discovery port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
+| XAP_LRMI_PORT        | 8200-8300     | Network protocol port range [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
 
 # Running a Production Cluster on Multiple Hosts
 
-By default, Docker containers run in an isolated network, using port mapping to communicate with external services and clients. While this has advantages, it reduces performance as it requires an additional network hop. As per Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network. This means you can't run more than one container per host, but for production environments this isn't a limitation, as there's no need to run more than one container.
+When running on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so containers on different hosts can interact with each other. 
+
+The `XAP_PUBLIC_HOST` complies with common practices of docker usage, and maintains image isolation. However, as per Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. Both options are supported by this image - it's up to you to choose which one better suites your needs.
 
 ## Beyond the Basics
 
