@@ -60,7 +60,7 @@ To run a demo on your machine:
 docker run --name test -it gigaspaces/xap
 ```
 
-When running this image without arguments, it automatically starts in demo mode with a Lookup Service and a Space called `demo-space` comprised of 2 partitions. 
+When running the XAP Docker image without arguments, it automatically starts in demo mode with a Lookup Service and a Space called `demo-space` comprised of 2 partitions. 
 
 # Connecting to the Client
 
@@ -94,15 +94,15 @@ docker run --name test -it -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:417
 
 # Running a Production Cluster on Multiple Hosts
 
-When running on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so containers on different hosts can interact with each other. 
+When running XAP in Docker containers on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other. 
 
-The `XAP_PUBLIC_HOST` complies with common practices of docker usage, and maintains image isolation. However, as per Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. Both options are supported by this image - it's up to you to choose which one better suites your needs.
+The `XAP_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The XAP Docker image supports both options, so choose the one that best suits your needs.
 
 ## Beyond the Basics
 
 # Ports
 
-This XAP image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
+The XAP Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
 
 | Environment Variable | Default Value | Description |
 | ---------------------|---------------|-------------|
@@ -113,7 +113,7 @@ This XAP image uses the ports described in the table below. You can change each 
 
 The XAP Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line. 
 
-If no arguments are specified after the image, the default command will be run: `demo`
+If no arguments are specified after the image, the default `demo` command will be run. 
 
 To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
