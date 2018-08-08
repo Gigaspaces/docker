@@ -22,9 +22,11 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [Getting Started](#getting-started)
 - [How to Use this Image](#how-to-use-this-image)
 - [Running Your First Container](#running-your-first-container)
+- [Connecting to the Client](#connecting-to-the-client)
 - [Running a Test Cluster on Your Host](#running-a-test-cluster-on-your-host)
 - [Running a Production Cluster on Multiple Hosts](#running-a-production-cluster-on-multiple-hosts)
 - [Beyond the Basics](#beyond-the-basics)
+    - [Ports](#ports)
     - [Running Other CLI Commands](#running-other-cli-commands)
     - [Using a Different Java Version](#using-a-different-java-version)
     - [Accessing the Logs](#accessing-the-logs)
@@ -46,14 +48,14 @@ docker run gigaspaces/xap-enterprise version
 
 # How to Use this Image
 
-The XAP Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The XAP Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 The XAP Enterprise image requires a license key to run, which can be provided using the `XAP_LICENSE` environment variable. You can use the `tryme` license, which enables you to use the full XAP product for 24 hours (and then terminates the image), or you can  get a longer [evaluation license](http://gigaspaces.com/eval-license).
 
 
 # Running Your First Container
 
-The simplest and fastest way to start working with XAP Enterprise is to get a single instance up and running on your local machine.  After the instance is initiated, you can start to explore the various features and capabilities.
+The simplest and fastest way to start working with XAP Enterprise is to get a single instance up and running on your local machine.  After the instance is initiated, you can start exploring the available features and capabilities.
 
 To run a single host on your machine:
 
@@ -68,71 +70,75 @@ When running the XAP Enterprise Docker image without arguments, a host is automa
 
 *Note: These ports are mapped to your host, so you can access them.*
 
-# Running a Test Cluster on Your Host
 
-If you want to test high availability or other distributed features on a single host, you can start multiple instances of XAP. All you need to do is assign identities so they can communicate with each other, and specify which containers will run the XAP Manager service. For example:
+# Connecting to the Client
+
+Docker runs containers in a bridge network by default. You can use any of the options described below to enable a client to connect to the Space.
+
+### Running the Client with the Docker Bridge Network
+
+By default, the client uses the host network interface. You can configure the client to use the Docker bridge network interface (the IP address is usually 172.17.0.x). Use the `XAP_NIC_ADDRESS` environment variable to enable the client to contact and interact with the Space.
+
+**NOTE: This only works for clients that reside on the same host as the Space. The Docker bridge network is inaccessible to other hosts.**
+
+### Running the Client in Another Docker Container
+
+Docker containers that reside on the same host use the same bridge network. If the client is in a Processing Unit, you can run it via another Docker container with the `pu run` command.
+
+**NOTE: This only works for clients that reside on the same host as the Space. Docker containers on other hosts will use a different bridge network.**
+
+### Using the Host Network
+
+Docker can run containers on the host network using the `--net=host` option with the `docker run` command. In this case, the client can connect and interact with the Space without additional configuration.
+
+**NOTE: Docker only supports the `--net=host` option on Linux hosts.**
+
+### Configuring the XAP Public Host
+
+By default, the XAP communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct XAP to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
-XAP_MANAGER_SERVERS=host1,host2,host3
-XAP_LICENSE=tryme
-docker run --name test1 -h=host1 -d -e XAP_LICENSE -e XAP_MANAGER_SERVERS -p 8090:8090 -p 8099:8099 gigaspaces/xap-enterprise
-docker run --name test2 -h=host2 -d -e XAP_LICENSE -e XAP_MANAGER_SERVERS -p 8091:8090 -p 8100:8099 gigaspaces/xap-enterprise
-docker run --name test3 -h=host3 -d -e XAP_LICENSE -e XAP_MANAGER_SERVERS gigaspaces/xap-enterprise
-docker run --name test4 -h=host4 -d -e XAP_LICENSE -e XAP_MANAGER_SERVERS gigaspaces/xap-enterprise
-docker run --name test5 -h=host5 -d -e XAP_LICENSE -e XAP_MANAGER_SERVERS gigaspaces/xap-enterprise
+docker run --name test -it -e XAP_LICENSE=tryme -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap-enterprise
 ```
-
-Due to starting multiple management containers on the same host, the ports of the 2nd and 3rd containers must be mapped to different host ports, in order to avoid conflicts with the 1st container. The rest of the containers don't expose any ports; they are connected to the management nodes via Docker's default bridge network, and are managed through the Web Management Console or REST Manager API. [Learn more](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager-rest.html)
-
 # Running a Production Cluster on Multiple Hosts
 
-By default, Docker containers run in an isolated network, using port mapping to communicate with external services and clients. While this has advantages, it reduces performance because it requires an additional network hop. As per Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network. This means you can't run more than one container per host, but for production environments this isn't a limitation, because there's no need to run more than one container.
 
-For this scenario, let's assume there are 5 hosts named `test1`..`test5`, similar to the previous example.  On each host, run the following:
+When running XAP in Docker containers on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
 
-__Required attributes__
-```
-XAP_MANAGER_SERVERS=host1,host2,host3
-XAP_PUBLIC_HOST=<machine public ip>
-XAP_LICENSE=tryme
-```
+The `XAP_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The XAP Docker image supports both options, so choose the one that best suits your needs.
 
-__Optional attributes the written values are default, you can overwrite it.__
-```
-XAP_LOOKUP_PORT=4174
-XAP_LRMI_PORT=8200-8300
-XAP_MANAGER_REST_PORT=8090
-WEBUI_PORT=8099
-XAP_WEBSTER_HTTP_PORT=8199
-XAP_RMI_REGISTRY_PORT=10098-10108
-
-XAP_ZOOKEEPER_CLIENT_PORT=2181
-XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT=2888
-XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
-```
-__Run with private/public ip and port forwarding (use above configuration)__
-```
-
-docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> -e XAP_MANAGER_SERVERS=host1,host2,host3 -e XAP_LICENSE=<tryme> -p 4174:4174 -p 8199:8199 -p 8200-8300:8200-8300 -p 8090:8090 -p 8099:8099 -p 10098-10108:10098-10108 -p 2181:2181 -p 2888:2888 -p 3888:3888 gigaspaces/xap-enterprise
-```
-__Run with --net=host__
-```
-docker run --name test -it --net=host -e XAP_LICENSE -e XAP_MANAGER_SERVERS gigaspaces/xap-enterprise
-```
 ## Beyond the Basics
+
+# Configuring XAP_MANAGER_SERVERS
+
+    When running xap-enterprise on Multiplke host you can configure what is the xap-manager server ip in your network.
+    XAP_MANAGER_SERVERS=host1,host2,host3
+    by default is local manger.
+
+# Ports
+
+The XAP Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
+
+| Environment Variable                      | Default Value | Description |
+| ------------------------------------------|---------------|-------------|
+| XAP_LOOKUP_PORT                           | 4174          | Lookup discovery port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
+| XAP_LRMI_PORT                             | 8200-8300     | Network protocol port range [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
+| XAP_MANAGER_REST_PORT                     | 8090          | Rest Manager API port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager-rest.html) |
+| WEBUI_PORT                                | 8099          | Web UI port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/tools-web-ui.html) |
+| XAP_WEBSTER_HTTP_PORT                     | 8199          | Internal web service used as part of the application deployment process.
+| XAP_RMI_REGISTRY_PORT                     | 10098-10108   | Uses for commuincate with client code
+| XAP_ZOOKEEPER_CLIENT_PORT                 | 2181          | Uses for Zookeeper client.
+| XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT      | 2888          | Uses for Zookeeper discovery ports.
+| XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT| 3888          | Uses for Zookeeper leader election port.
+
 
 # Running Other CLI Commands
 
-As mentioned earlier, the XAP Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line. For example, to run the command `xap host list` via Docker, simply run:
+The XAP Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line.
 
-```
-docker run -it gigaspaces/xap-enterprise host list
-```
-
-If no arguments are specified after the image, the default command is run: `host run-agent --auto`
+If no arguments are specified after the image, the default `host run-agent --auto` command will be run.
 
 To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
-
 
 # Using a Different Java Version
 
