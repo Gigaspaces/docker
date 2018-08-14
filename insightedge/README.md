@@ -8,6 +8,12 @@ The InsightEdge platform, a combination of the XAP in-memory data grid and an op
 
 The InsightEdge platform provides extreme performance with ultra-low latency, high-throughput transactions and stream processing, due to the co-location of applications and analytics. All of this functionality is available in a cloud-native, infrastructure-agnostic deployment for hybrid cloud and on-premises environments.
 
+Insightedge provides the following advantages:
+
+- Enables your complete app to run in its entirety on a single platform, with all the tiers collapsed into one container.
+- Gives you fast data access by storing ALL your data in-memory, and ensures high availability using in-memory backup within each container.
+- Scales your app automatically and on demand.
+
 To learn more about GigaSpaces products, visit the [website](https://www.gigaspaces.com).
 
 ***
@@ -17,9 +23,11 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [Getting Started](#getting-started)
 - [How to Use this Image](#how-to-use-this-image)
 - [Running Your First Container](#running-your-first-container)
+- [Connecting to the Client](#connecting-to-the-client)- [Connecting to the Client](#connecting-to-the-client)
 - [Running a Test Cluster on Your Host](#running-a-test-cluster-on-your-host)
 - [Running a Production Cluster on Multiple Hosts](#running-a-production-cluster-on-multiple-hosts)
 - [Beyond the Basics](#beyond-the-basics)
+    - [Ports](#ports)
     - [Running Other CLI Commands](#running-other-cli-commands)
     - [Using a Different Java Version](#using-a-different-java-version)
     - [Accessing the Logs](#accessing-the-logs)
@@ -41,53 +49,77 @@ docker run gigaspaces/insightedge version
 
 # How to Use this Image
 
-The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the[CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 
 # Running Your First Container
 
-The simplest and fastest way to start working with InsightEdge is to get a single instance up and running on your local machine.  After the instance is initiated, you can start to explore the various features and capabilities.
+The simplest and fastest way to start working with InsightEdge is to get a single instance up and running on your local machine.  After the instance is initiated, you can start exploring the available features and capabilities.
 
-To run a single host on your machine:
-
+To run a demo on your machine:
 ```
-docker run --name test -it --net=host gigaspaces/insightedge
-```
-
-To run a single host on your machine with port mapping:
-you cal also overwrite any of the follwing ports:
-```
-XAP_LOOKUP_PORT 4174
-XAP_LRMI_PORT 8200-8300
-SPARK_MASTER_PORT 7077
-SPARK_MASTER_WEBUI_PORT 8080
-SPARK_MASTER_REST_PORT 6066
-ZEPPELIN_PORT 9090
-
-docker run --name test -it -e XAP_PUBLIC_HOST=<machine public ip> --p 4174:4174 -p 8200-8300:8200-8300 -p 7077:7077 -p 8080:8080 -p 6066:6066 -p 9090:9090 gigaspaces/insightedge
+docker run --name test -it  gigaspaces/insightedge
 ```
 
+When running the XAP Docker image without arguments, it automatically starts in demo mode with a Lookup Service and a Space called `demo-space` comprised of 2 partitions.
 
-When running the InsightEdge Docker image without arguments, a host is automatically started in demo mode, with a lookup service and a Space called `demo-space` comprised of 2 partitions. In addition, it starts a Spark master, Spark worker and Apache Zeppelin. In order for a client to connect to these services, you can use one of the following:
+# Connecting to the Client
 
-* Run the client in Docker as well on the same host.
-* Use the `--net=host` option; Docker will run the container on the same host as the network (works only on Linux hosts).
-* Configure the client lookup settings to the Docker bridge network (172.17.0.x).
-* Use `-p` to map the ports from the container to the host.
+Docker runs containers in a bridge network by default. You can use any of the options described below to enable a client to connect to the Space.
 
+### Running the Client with the Docker Bridge Network
+
+By default, the client uses the host network interface. You can configure the client to use the Docker bridge network interface (the IP address is usually 172.17.0.x). Use the `XAP_NIC_ADDRESS` environment variable to enable the client to contact and interact with the Space.
+
+**NOTE: This only works for clients that reside on the same host as the Space. The Docker bridge network is inaccessible to other hosts.**
+
+### Running the Client in Another Docker Container
+
+Docker containers that reside on the same host use the same bridge network. If the client is in a Processing Unit, you can run it via another Docker container with the `pu run` command.
+
+**NOTE: This only works for clients that reside on the same host as the Space. Docker containers on other hosts will use a different bridge network.**
+
+### Using the Host Network
+
+Docker can run containers on the host network using the `--net=host` option with the `docker run` command. In this case, the client can connect and interact with the Space without additional configuration.
+
+**NOTE: Docker only supports the `--net=host` option on Linux hosts.**
+
+### Configuring the XAP Public Host
+
+By default, the XAP communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct XAP to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
+
+```
+docker run --name test -it -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap
+```
 
 # Running a Production Cluster on Multiple Hosts
 
-By default, Docker containers run in an isolated network, using port mapping to communicate with external services and clients. While this has advantages, it reduces performance as it requires an additional network hop. As per Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network. This means you can't run more than one container per host, but for production environments this isn't a limitation, as there's no need to run more than one container.
+When running Insightedge in Docker containers on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
+
+The `XAP_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The XAP Docker image supports both options, so choose the one that best suits your needs.
 
 ## Beyond the Basics
+
+# Ports
+
+The XAP Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
+
+| Environment Variable   | Default Value | Description |
+| -----------------------|---------------|-------------|
+| XAP_LOOKUP_PORT        | 4174          | Lookup discovery port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
+| XAP_LRMI_PORT          | 8200-8300     | Network protocol port range [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
+| SPARK_MASTER_PORT      | 7077          | Spark Master Port [(docs)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
+| SPARK_MASTER_WEBUI_PORT| 8080          | Spark Master Web UI port [(docs)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
+| SPARK_MASTER_REST_PORT | 6066          | Spark Master rest port [(docs)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
+| ZEPPELIN_PORT          | 9090          | Insightedge Zeppelin port [(docs)](https://docs.gigaspaces.com/xap/12.3/started/insightedge-zeppelin.html) |
 
 # Running Other CLI Commands
 
 The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line. 
 
-If no arguments are specified after the image, the default command will be run: `demo`
+If no arguments are specified after the image, the default `demo` command will be run.
 
 To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
