@@ -29,7 +29,7 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 To test the InsightEdge Docker image, run the following in your command line to display a help screen with all the available commands: 
 
 ```
-docker run gigaspaces/insightedge help
+docker run gigaspaces/insightedge --help
 ```
 
 
