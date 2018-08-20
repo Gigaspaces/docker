@@ -110,8 +110,8 @@ The XAP Docker image uses the ports described in the table below. You can change
 
 | Environment Variable | Default Value | Description |
 | ---------------------|---------------|-------------|
-| XAP_LOOKUP_PORT      | 4174          | Lookup discovery port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
-| XAP_LRMI_PORT        | 8200-8300     | Network protocol port range [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
+| XAP_LOOKUP_PORT      | 4174          | Lookup discovery port [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
+| XAP_LRMI_PORT        | 8200-8300     | Network protocol port range [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
 
 # Running Other CLI Commands
 
