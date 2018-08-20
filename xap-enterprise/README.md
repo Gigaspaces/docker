@@ -69,7 +69,7 @@ docker run --name test -it -e XAP_LICENSE=tryme -p 8090:8090 -p 8099:8099 gigasp
 
 When running the XAP Enterprise Docker image without arguments, a host is automatically started with the following components:
 
-* XAP Manager (mapped to port `8090`) [Learn more](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager.html)
+* Platform Manager (mapped to port `8090`) [Learn more](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager.html)
 * Web Management Console (mapped to port `8099`) [Learn more](https://docs.gigaspaces.com/xap/12.3/admin/tools-web-ui.html)
 
 *Note: These ports are mapped to your host, so you can access them.*
@@ -129,7 +129,7 @@ The XAP Enterprise Docker image uses the ports described in the table below. You
 | XAP_MANAGER_REST_PORT                     | 8090          | REST Manager API port [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager-rest.html) |
 | WEBUI_PORT                                | 8099          | Web Managment Console port [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/tools-web-ui.html) |
 | XAP_WEBSTER_HTTP_PORT                     | 8199          | Internal web service used as part of the application deployment process.
-| XAP_RMI_REGISTRY_PORT                     | 10098-10108   | Used to commuincate with the client application.
+| XAP_RMI_REGISTRY_PORT                     | 10098-10108   | Used to communicate with the client application.
 | XAP_ZOOKEEPER_CLIENT_PORT                 | 2181          | Used for the Zookeeper client.
 | XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT      | 2888          | Used for the Zookeeper discovery ports.
 | XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT| 3888          | Used for the Zookeeper leader election port.
