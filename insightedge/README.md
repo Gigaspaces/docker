@@ -23,8 +23,11 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [Getting Started](#getting-started)
 - [How to Use this Image](#how-to-use-this-image)
 - [Running Your First Container](#running-your-first-container)
-- [Connecting to the Client](#connecting-to-the-client)- [Connecting to the Client](#connecting-to-the-client)
-- [Running a Test Cluster on Your Host](#running-a-test-cluster-on-your-host)
+- [Connecting to the Client](#connecting-to-the-client)
+- [Running the Client with the Docker Bridge Network](#running-the-client-with-the-docker-bridge-network)
+- [Running the Client in another Docker Container](#running-the-client-in-another-docker-container)
+- [Using the Host Network](#using-the-host-network)
+- [Configuring the Public Host](#configuring-the-public-host)
 - [Running a Production Cluster on Multiple Hosts](#running-a-production-cluster-on-multiple-hosts)
 - [Beyond the Basics](#beyond-the-basics)
     - [Ports](#ports)
@@ -39,7 +42,6 @@ To test the InsightEdge Docker image, run the following in your command line to 
 ```
 docker run gigaspaces/insightedge --help
 ```
-
 
  For example, the `version` command prints version information:
 
@@ -62,7 +64,7 @@ To run a demo on your machine:
 docker run --name test -it  gigaspaces/insightedge
 ```
 
-When running the XAP Docker image without arguments, it automatically starts in demo mode with a Lookup Service and a Space called `demo-space` comprised of 2 partitions.
+When running the InsightEdge Docker image without arguments, it automatically starts in demo mode with a Lookup Service and a Space called `demo-space` comprised of 2 partitions.
 
 # Connecting to the Client
 
@@ -86,9 +88,9 @@ Docker can run containers on the host network using the `--net=host` option with
 
 **NOTE: Docker only supports the `--net=host` option on Linux hosts.**
 
-### Configuring the XAP Public Host
+### Configuring the Public Host
 
-By default, the XAP communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct XAP to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
+By default, the XAP core's communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct InsightEdge to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
 docker run --name test -it -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap
@@ -104,16 +106,16 @@ The `XAP_PUBLIC_HOST` environment variable complies with common practices of Doc
 
 # Ports
 
-The XAP Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
+The InsightEdge Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
 
 | Environment Variable   | Default Value | Description |
 | -----------------------|---------------|-------------|
-| XAP_LOOKUP_PORT        | 4174          | Lookup discovery port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
-| XAP_LRMI_PORT          | 8200-8300     | Network protocol port range [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
-| SPARK_MASTER_PORT      | 7077          | Spark Master Port [(docs)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
-| SPARK_MASTER_WEBUI_PORT| 8080          | Spark Master Web UI port [(docs)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
-| SPARK_MASTER_REST_PORT | 6066          | Spark Master rest port [(docs)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
-| ZEPPELIN_PORT          | 9090          | Insightedge Zeppelin port [(docs)](https://docs.gigaspaces.com/xap/12.3/started/insightedge-zeppelin.html) |
+| XAP_LOOKUP_PORT        | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
+| XAP_LRMI_PORT          | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
+| SPARK_MASTER_PORT      | 7077          | Spark Master port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
+|SPARK_MASTER_WEBUI_PORT | 8080          | Spark Master Web UI port.  [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
+|SPARK_MASTER_REST_PORT  | 6066          | Spark Master REST port.  [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
+| ZEPPELIN_PORT          | 9090          | InsightEdge Zeppelin port.  [(learn more)](https://docs.gigaspaces.com/xap/12.3/started/insightedge-zeppelin.html) |
 
 # Running Other CLI Commands
 
