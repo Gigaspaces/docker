@@ -23,9 +23,13 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [How to Use this Image](#how-to-use-this-image)
 - [Running Your First Container](#running-your-first-container)
 - [Connecting to the Client](#connecting-to-the-client)
-- [Running a Test Cluster on Your Host](#running-a-test-cluster-on-your-host)
+- [Running the Client with the Docker Bridge Network](#running-the-client-with-the-docker-bridge-network)
+- [Running the Client in Another Docker Container](#running-the-client-in-another-docker-container)
+- [Using the Host Network](#using-the-host-network)
+- [Configuring the XAP Public Host](#configuring-the-xap-public-host)
 - [Running a Production Cluster on Multiple Hosts](#running-a-production-cluster-on-multiple-hosts)
 - [Beyond the Basics](#beyond-the-basics)
+    - [Configuring the XAP Manager Server IP Address](#configuring-the-xap-manager-server-ip-address)
     - [Ports](#ports)
     - [Running Other CLI Commands](#running-other-cli-commands)
     - [Using a Different Java Version](#using-a-different-java-version)
@@ -95,46 +99,45 @@ Docker can run containers on the host network using the `--net=host` option with
 
 ### Configuring the XAP Public Host
 
-By default, the XAP communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct XAP to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
+By default, the XAP communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct XAP Enterprise to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
 docker run --name test -it -e XAP_LICENSE=tryme -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap-enterprise
 ```
+
 # Running a Production Cluster on Multiple Hosts
 
-
-When running XAP in Docker containers on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
+When running XAP Enterprise in Docker containers on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
 
 The `XAP_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The XAP Docker image supports both options, so choose the one that best suits your needs.
 
 ## Beyond the Basics
 
-# Configuring XAP_MANAGER_SERVERS
+# Configuring the XAP Manager Server IP Address
 
-    When running xap-enterprise on Multiplke host you can configure what is the xap-manager server ip in your network.
-    XAP_MANAGER_SERVERS=host1,host2,host3
-    by default is local manger.
+ When running XAP Enterprise on multiple hosts, you can configure the XAP Manager Server IP address in your network. 
+`XAP_MANAGER_SERVERS=host1,host2,host3` by default is the local manager.
 
 # Ports
 
-The XAP Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
+The XAP Enterprise Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
 
 | Environment Variable                      | Default Value | Description |
 | ------------------------------------------|---------------|-------------|
-| XAP_LOOKUP_PORT                           | 4174          | Lookup discovery port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
-| XAP_LRMI_PORT                             | 8200-8300     | Network protocol port range [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
-| XAP_MANAGER_REST_PORT                     | 8090          | Rest Manager API port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager-rest.html) |
-| WEBUI_PORT                                | 8099          | Web UI port [(docs)](https://docs.gigaspaces.com/xap/12.3/admin/tools-web-ui.html) |
+| XAP_LOOKUP_PORT                           | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
+| XAP_LRMI_PORT                             | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
+| XAP_MANAGER_REST_PORT                     | 8090          | REST Manager API port [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager-rest.html) |
+| WEBUI_PORT                                | 8099          | Web Managment Console port [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/tools-web-ui.html) |
 | XAP_WEBSTER_HTTP_PORT                     | 8199          | Internal web service used as part of the application deployment process.
-| XAP_RMI_REGISTRY_PORT                     | 10098-10108   | Uses for commuincate with client code
-| XAP_ZOOKEEPER_CLIENT_PORT                 | 2181          | Uses for Zookeeper client.
-| XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT      | 2888          | Uses for Zookeeper discovery ports.
-| XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT| 3888          | Uses for Zookeeper leader election port.
+| XAP_RMI_REGISTRY_PORT                     | 10098-10108   | Used to commuincate with the client application.
+| XAP_ZOOKEEPER_CLIENT_PORT                 | 2181          | Used for the Zookeeper client.
+| XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT      | 2888          | Used for the Zookeeper discovery ports.
+| XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT| 3888          | Used for the Zookeeper leader election port.
 
 
 # Running Other CLI Commands
 
-The XAP Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line.
+The XAP Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line.
 
 If no arguments are specified after the image, the default `host run-agent --auto` command will be run.
 
