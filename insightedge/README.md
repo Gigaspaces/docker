@@ -1,4 +1,4 @@
-##  InsightEdge platform
+##  InsightEdge Platform
 
 ![InsightEdge logo](https://www.gigaspaces.com/sites/default/files/solutions/logo-insightedge-color-small.png)
 
@@ -51,7 +51,7 @@ docker run gigaspaces/insightedge version
 
 # How to Use this Image
 
-The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the[CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 
@@ -93,7 +93,7 @@ Docker can run containers on the host network using the `--net=host` option with
 By default, the XAP core's communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct InsightEdge to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
-docker run --name test -it -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap
+docker run --name test -it -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/insightedge
 ```
 
 # Running a Production Cluster on Multiple Hosts
