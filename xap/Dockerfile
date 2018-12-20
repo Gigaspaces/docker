@@ -10,7 +10,7 @@ ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VE
 ENV GS_HOME /opt/gigaspaces
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
-RUN apk --no-cache add openssl wget unzip &&\
+RUN apk --no-cache add openssl wget unzip bash libc6-compat &&\
     wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME} &&\
