@@ -1,18 +1,14 @@
 ARG JAVA_IMAGE=openjdk
-ARG JAVA_TAG=8
-FROM ${JAVA_IMAGE}:${JAVA_TAG}-alpine
-
+ARG JAVA_TAG=8-alpine
+FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=14.0.1
 ARG GS_MILESTONE=rc1
 ARG GS_BUILD=20205
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
-
-# Declare home directory
 ENV GS_HOME /opt/gigaspaces
 WORKDIR ${GS_HOME}
-
 # Download $GS_URL and unzip to $GS_HOME
 RUN apk --no-cache add openssl wget unzip &&\
     wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
