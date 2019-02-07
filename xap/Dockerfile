@@ -28,3 +28,4 @@ ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.discoveryPort=${XAP_LOOKUP_PORT} -Dcom.
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["demo"]
+
