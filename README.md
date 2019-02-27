@@ -14,4 +14,4 @@ GigaSpaces provides Docker images for the following products:
 
 - InsightEdge Enterprise edition, which offers all the above plus high availability (up to 5 nines) with auto-healing, disaster recovery via geo-redundancy, fast data replication and native persistence.
 
-  
+ 
