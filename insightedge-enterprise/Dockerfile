@@ -17,6 +17,7 @@ RUN apk --no-cache add openssl wget unzip &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
     rm -f /tmp/gigaspaces.zip
 
+RUN apk add --no-cache nss
 # Configure and expose ports
 ENV XAP_NIC_ADDRESS "#eth0:ip#"
 ENV XAP_LOOKUP_PORT 4174
