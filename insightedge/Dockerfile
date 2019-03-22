@@ -4,7 +4,7 @@ FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=14.2.0
 ARG GS_MILESTONE=rc3
-ARG GS_BUILD=20414-11
+ARG GS_BUILD=20414-12
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-${GS_VERSION}-${GS_MILESTONE}-b${GS_BUILD}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
