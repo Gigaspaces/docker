@@ -51,7 +51,7 @@ docker run gigaspaces/insightedge version
 
 # How to Use this Image
 
-The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 
@@ -110,12 +110,12 @@ The InsightEdge Docker image uses the ports described in the table below. You ca
 
 | Environment Variable   | Default Value | Description |
 | -----------------------|---------------|-------------|
-| XAP_LOOKUP_PORT        | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
-| XAP_LRMI_PORT          | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
+| XAP_LOOKUP_PORT        | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
+| XAP_LRMI_PORT          | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
 | SPARK_MASTER_PORT      | 7077          | Spark Master port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
 |SPARK_MASTER_WEBUI_PORT | 8080          | Spark Master Web UI port.  [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
 |SPARK_MASTER_REST_PORT  | 6066          | Spark Master REST port.  [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
-| ZEPPELIN_PORT          | 9090          | InsightEdge Zeppelin port.  [(learn more)](https://docs.gigaspaces.com/xap/12.3/started/insightedge-zeppelin.html) |
+| ZEPPELIN_PORT          | 9090          | InsightEdge Zeppelin port.  [(learn more)](https://docs.gigaspaces.com/14.2/started/insightedge-zeppelin.html) |
 
 # Running Other CLI Commands
 
@@ -123,7 +123,7 @@ The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). 
 
 If no arguments are specified after the image, the default `demo` command will be run.
 
-To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 # Using a Different Java Version

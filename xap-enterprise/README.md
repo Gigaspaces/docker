@@ -52,7 +52,7 @@ docker run gigaspaces/xap-enterprise version
 
 # How to Use this Image
 
-The XAP Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The XAP Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 The XAP Enterprise image requires a license key to run, which can be provided using the `XAP_LICENSE` environment variable. You can use the `tryme` license, which enables you to use the full XAP product for 24 hours (and then terminates the image), or you can  get a longer [evaluation license](http://gigaspaces.com/eval-license).
 
@@ -69,8 +69,8 @@ docker run --name test -it -e XAP_LICENSE=tryme -p 8090:8090 -p 8099:8099 gigasp
 
 When running the XAP Enterprise Docker image without arguments, a host is automatically started with the following components:
 
-* Platform Manager (mapped to port `8090`) [Learn more](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager.html)
-* Web Management Console (mapped to port `8099`) [Learn more](https://docs.gigaspaces.com/xap/12.3/admin/tools-web-ui.html)
+* Platform Manager (mapped to port `8090`) [Learn more](https://docs.gigaspaces.com/14.2/admin/xap-manager.html)
+* Web Management Console (mapped to port `8099`) [Learn more](https://docs.gigaspaces.com/14.2/admin/tools-web-ui.html)
 
 *Note: These ports are mapped to your host, so you can access them.*
 
@@ -124,10 +124,10 @@ The XAP Enterprise Docker image uses the ports described in the table below. You
 
 | Environment Variable                      | Default Value | Description |
 | ------------------------------------------|---------------|-------------|
-| XAP_LOOKUP_PORT                           | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/network-lookup-service-configuration.html) |
-| XAP_LRMI_PORT                             | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/tuning-communication-protocol.html) |
-| XAP_MANAGER_REST_PORT                     | 8090          | REST Manager API port [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/xap-manager-rest.html) |
-| WEBUI_PORT                                | 8099          | Web Managment Console port [(learn more)](https://docs.gigaspaces.com/xap/12.3/admin/tools-web-ui.html) |
+| XAP_LOOKUP_PORT                           | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
+| XAP_LRMI_PORT                             | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
+| XAP_MANAGER_REST_PORT                     | 8090          | REST Manager API port [(learn more)](https://docs.gigaspaces.com/14.2/admin/xap-manager-rest.html) |
+| WEBUI_PORT                                | 8099          | Web Managment Console port [(learn more)](https://docs.gigaspaces.com/14.2/admin/tools-web-ui.html) |
 | XAP_WEBSTER_HTTP_PORT                     | 8199          | Internal web service used as part of the application deployment process.
 | XAP_RMI_REGISTRY_PORT                     | 10098-10108   | Used to communicate with the client application.
 | XAP_ZOOKEEPER_CLIENT_PORT                 | 2181          | Used for the Zookeeper client.
@@ -141,7 +141,7 @@ The XAP Enterprise Docker image utilizes GigaSpaces' command line interface (CLI
 
 If no arguments are specified after the image, the default `host run-agent --auto` command will be run.
 
-To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 # Using a Different Java Version
 
