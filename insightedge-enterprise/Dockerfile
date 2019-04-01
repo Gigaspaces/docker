@@ -52,9 +52,7 @@ RUN set -ex && \
     chgrp root /etc/passwd && chmod ug+rw /etc/passwd
 
 # Configure Classpath environment variables
-ENV INSIGHTEDGE_CLASSPATH "${GS_HOME}/insightedge/lib/*:${GS_HOME}/lib/required/*:${GS_HOME}/lib/optional/spatial/*"
-ENV ANALYTICS_XTREME_CLASSPATH "${GS_HOME}/insightedge/lib/analytics-xtreme/*:${GS_HOME}/lib/platform/service-grid/*"
-ENV INSIGHTEDGE_CLASSPATH "${INSIGHTEDGE_CLASSPATH}:${ANALYTICS_XTREME_CLASSPATH}"
+ENV INSIGHTEDGE_CLASSPATH "${GS_HOME}/insightedge/lib/*:${GS_HOME}/insightedge/lib/jdbc/*:${GS_HOME}/insightedge/lib/analytics-xtreme/*:${GS_HOME}/lib/required/*:${GS_HOME}/lib/optional/spatial/*"
 
 ENV SPARK_CLASSPATH "${SPARK_CLASSPATH}:${INSIGHTEDGE_CLASSPATH}"
 ENV SPARK_DIST_CLASSPATH "${SPARK_CLASSPATH}"
