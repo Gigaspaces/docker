@@ -20,7 +20,9 @@ RUN apk --no-cache add openssl wget unzip bash libc6-compat &&\
 ADD entrypoint.sh /opt/entrypoint.sh
 
 RUN apk add --no-cache nss
+RUN apk update && apk add --no-cache libc6-compat
 # Configure and expose ports
+ENV LD_LIBRARY_PATH "/lib:/lib64"
 ENV XAP_NIC_ADDRESS "#eth0:ip#"
 ENV XAP_LOOKUP_PORT 4174
 ENV XAP_LRMI_PORT 8200-8300
