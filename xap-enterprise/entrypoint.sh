@@ -8,4 +8,4 @@ if [ -z "$XAP_MANAGER_SERVERS" ]; then
     fi
 fi
 
-/opt/gigaspaces/bin/xap $*
+/opt/gigaspaces/bin/gs.sh $*

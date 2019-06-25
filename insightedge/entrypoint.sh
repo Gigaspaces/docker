@@ -8,4 +8,4 @@ fi
 
 echo "${EXT_JAVA_OPTIONS}" >> ${SPARK_JAVA_OPTIONS_FILE}
 
-/opt/gigaspaces/bin/insightedge $*
+/opt/gigaspaces/bin/gs.sh $*
