@@ -1,6 +1,6 @@
 ##  InsightEdge Enterprise
 
-![InsightEdge logo](https://www.gigaspaces.com/sites/default/files/solutions/logo-insightedge-color-small.png)
+![InsightEdge logo](https://docs.gigaspaces.com/images/logo-insightedge-color-small.png)
 
 ## What is InsightEdge Enterprise?
 
