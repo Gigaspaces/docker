@@ -11,16 +11,22 @@ ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VE
 ENV GS_HOME /opt/gigaspaces
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
+COPY gigaspaces-xap-enterprise-15.0.0-m6-ci-55.zip /tmp/gigaspaces.zip
 RUN apk --no-cache add openssl wget unzip bash libc6-compat &&\
-    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
+#    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME} &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
     rm -f /tmp/gigaspaces.zip
 ADD entrypoint.sh /opt/entrypoint.sh
-
 RUN apk add --no-cache nss
 RUN apk update && apk add --no-cache libc6-compat
+# Install kubernetes java client uber jar
+RUN if test -f ${GS_HOME}/tools/kubernetes/pom.xml;then\
+    apk --no-cache add maven &&\
+    mvn package clean --file=${GS_HOME}/tools/kubernetes/pom.xml &&\
+    apk --no-cache del maven;\
+    fi
 # Configure and expose ports
 ENV LD_LIBRARY_PATH "/lib:/lib64"
 ENV XAP_NIC_ADDRESS "#eth0:ip#"
