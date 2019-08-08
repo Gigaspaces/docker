@@ -21,9 +21,9 @@ ADD entrypoint.sh /opt/entrypoint.sh
 RUN apk add --no-cache nss
 RUN apk update && apk add --no-cache libc6-compat
 # Install kubernetes java client uber jar
-RUN if test -f ${GS_HOME}/tools/kubernetes/pom.xml;then\
+RUN if test -f ${GS_HOME}/tools/kubernetes/client/pom.xml;then\
     apk --no-cache add maven &&\
-    mvn package clean --file=${GS_HOME}/tools/kubernetes/pom.xml &&\
+    mvn package clean --file=${GS_HOME}/tools/kubernetes/client/pom.xml &&\
     apk --no-cache del maven;\
     fi
 # Configure and expose ports
