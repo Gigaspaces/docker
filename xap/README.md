@@ -72,7 +72,7 @@ Docker runs containers in a bridge network by default. You can use any of the op
 
 ### Running the Client with the Docker Bridge Network
 
-By default, the client uses the host network interface. You can configure the client to use the Docker bridge network interface (the IP address is usually 172.17.0.x). Use the `XAP_NIC_ADDRESS` environment variable to enable the client to contact and interact with the Space.
+By default, the client uses the host network interface. You can configure the client to use the Docker bridge network interface (the IP address is usually 172.17.0.x). Use the `GS_NIC_ADDRESS` environment variable to enable the client to contact and interact with the Space.
 
 **NOTE: This only works for clients that reside on the same host as the Space. The Docker bridge network is inaccessible to other hosts.**
 
@@ -90,17 +90,17 @@ Docker can run containers on the host network using the `--net=host` option with
 
 ### Configuring the XAP Public Host
 
-By default, the XAP communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct XAP to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
+By default, the XAP communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `GS_PUBLIC_HOST` enviromnent variable to instruct XAP to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
-docker run --name test -it -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap
+docker run --name test -it -e GS_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/xap
 ```
 
 # Running a Production Cluster on Multiple Hosts
 
-When running XAP in Docker containers on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other. 
+When running XAP in Docker containers on multiple hosts, you need to either configure `GS_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
 
-The `XAP_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The XAP Docker image supports both options, so choose the one that best suits your needs.
+The `GS_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The XAP Docker image supports both options, so choose the one that best suits your needs.
 
 ## Beyond the Basics
 
@@ -110,8 +110,8 @@ The XAP Docker image uses the ports described in the table below. You can change
 
 | Environment Variable | Default Value | Description |
 | ---------------------|---------------|-------------|
-| XAP_LOOKUP_PORT      | 4174          | Lookup discovery port [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
-| XAP_LRMI_PORT        | 8200-8300     | Network protocol port range [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
+| GS_LOOKUP_PORT       | 4174          | Lookup discovery port [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
+| GS_LRMI_PORT         | 8200-8300     | Network protocol port range [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
 
 # Running Other CLI Commands
 

@@ -29,7 +29,7 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 - [Configuring the Public Host](#running-the-client-with-the-docker-bridge-network)
 - [Running a Production Cluster on Multiple Hosts](#configuring-the-public-host)
 - [Beyond the Basics](#beyond-the-basics)
-    - [Configuring the XAP_MANAGER_SERVER IP Address](#configuring-the-xap-manager-server-ip-address)
+    - [Configuring the GS_MANAGER_SERVER IP Address](#configuring-the-xap-manager-server-ip-address)
     - [Ports](#ports)
     - [Running Other CLI Commands](#running-other-cli-commands)
     - [Using a Different Java Version](#using-a-different-java-version)
@@ -53,7 +53,7 @@ docker run gigaspaces/insightedge-enterprise version
 
 The InsightEdge Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
-The InsightEdge Enterprise image requires a license key to run, which can be provided using the `XAP_LICENSE` environment variable. You can use the `tryme` license, which enables you to use the full InsightEdge product for 24 hours (and then terminates the image), or you can  get a longer [evaluation license](http://gigaspaces.com/eval-license).
+The InsightEdge Enterprise image requires a license key to run, which can be provided using the `GS_LICENSE` environment variable. You can use the `tryme` license, which enables you to use the full InsightEdge product for 24 hours (and then terminates the image), or you can  get a longer [evaluation license](http://gigaspaces.com/eval-license).
 
 
 # Running Your First Container
@@ -63,7 +63,7 @@ The simplest and fastest way to start working with InsightEdge Enterprise is to 
 To run a single host on your machine:
 
 ```
-docker run --name test -it -e XAP_LICENSE=tryme gigaspaces/insightedge-enterprise
+docker run --name test -it -e GS_LICENSE=tryme gigaspaces/insightedge-enterprise
 ```
 
 When running the InsightEdge Enterprise Docker image without arguments, a host is automatically started with the following components:
@@ -83,7 +83,7 @@ Docker runs containers in a bridge network by default. You can use any of the op
 
 ### Running the Client with the Docker Bridge Network
 
-By default, the client uses the host network interface. You can configure the client to use the Docker bridge network interface (the IP address is usually 172.17.0.x). Use the `XAP_NIC_ADDRESS` environment variable to enable the client to contact and interact with the Space.
+By default, the client uses the host network interface. You can configure the client to use the Docker bridge network interface (the IP address is usually 172.17.0.x). Use the `GS_NIC_ADDRESS` environment variable to enable the client to contact and interact with the Space.
 
 **NOTE: This only works for clients that reside on the same host as the Space. The Docker bridge network is inaccessible to other hosts.**
 
@@ -101,22 +101,22 @@ Docker can run containers on the host network using the `--net=host` option with
 
 ### Configuring the Public Host
 
-By default, the XAP core communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `XAP_PUBLIC_HOST` enviromnent variable to instruct InsightEdge Enterprise to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
+By default, the XAP core communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `GS_PUBLIC_HOST` enviromnent variable to instruct InsightEdge Enterprise to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
-docker run --name test -it -e XAP_LICENSE=tryme -e XAP_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/insightedge-enterprise
+docker run --name test -it -e GS_LICENSE=tryme -e GS_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/insightedge-enterprise
 ```
 # Running a Production Cluster on Multiple Hosts
 
-When running InsightEdge Enterprise in Docker containers on multiple hosts, you need to either configure `XAP_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
+When running InsightEdge Enterprise in Docker containers on multiple hosts, you need to either configure `GS_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
 
-The `XAP_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The InsightEdge Enterprise Docker image supports both options, so choose the one that best suits your needs.
+The `GS_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The InsightEdge Enterprise Docker image supports both options, so choose the one that best suits your needs.
 
 ## Beyond the Basics
 
-# Configuring the `XAP_MANAGER_SERVER` IP Address
+# Configuring the `GS_MANAGER_SERVER` IP Address
 
-When running InsightEdge Enterprise on multiple hosts, you can configure the IP address for the Platform Manager in your network in the `XAP_MANAGER_SERVERS` environment variable. `XAP_MANAGER_SERVERS=host1,host2,host3` by default is the local manager.
+When running InsightEdge Enterprise on multiple hosts, you can configure the IP address for the Platform Manager in your network in the `GS_MANAGER_SERVERS` environment variable. `GS_MANAGER_SERVERS=host1,host2,host3` by default is the local manager.
 
 # Ports
 
@@ -124,15 +124,15 @@ The InsightEdge Enterprise Docker image uses the ports described in the table be
 
 | Environment Variable                      | Default Value | Description |
 | ------------------------------------------|---------------|-------------|
-| XAP_LOOKUP_PORT                           | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
-| XAP_LRMI_PORT                             | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
-| XAP_MANAGER_REST_PORT                     | 8090          | REST Manager API port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/xap-manager-rest.html) |
-| WEBUI_PORT                                | 8099          | Web Management Console port [(learn more)](https://docs.gigaspaces.com/14.2/admin/tools-web-ui.html) |
-| XAP_WEBSTER_HTTP_PORT                     | 8199          | Internal web service used as part of the application deployment process. |
-| XAP_RMI_REGISTRY_PORT                     | 10098-10108   | Used to communicate with client application. |
-| XAP_ZOOKEEPER_CLIENT_PORT                 | 2181          | Used for the Zookeeper client. |
-| XAP_MANAGER_ZOOKEEPER_DISCOVERY_PORT      | 2888          | Used for the Zookeeper discovery ports. |
-| XAP_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT| 3888          | Used for the Zookeeper leader election port. |
+| GS_LOOKUP_PORT                            | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
+| GS_LRMI_PORT                              | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
+| GS_MANAGER_REST_PORT                      | 8090          | REST Manager API port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/xap-manager-rest.html) |
+| GS_WEBUI_PORT                             | 8099          | Web Management Console port [(learn more)](https://docs.gigaspaces.com/14.2/admin/tools-web-ui.html) |
+| GS_WEBSTER_HTTP_PORT                      | 8199          | Internal web service used as part of the application deployment process. |
+| GS_RMI_REGISTRY_PORT                      | 10098-10108   | Used to communicate with client application. |
+| GS_ZOOKEEPER_CLIENT_PORT                  | 2181          | Used for the Zookeeper client. |
+| GS_MANAGER_ZOOKEEPER_DISCOVERY_PORT       | 2888          | Used for the Zookeeper discovery ports. |
+| GS_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT | 3888          | Used for the Zookeeper leader election port. |
 | SPARK_MASTER_PORT                         | 7077          | Spark Master port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
 | SPARK_MASTER_WEBUI_PORT                   | 8080          | Spark Master Web UI port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
 | SPARK_MASTER_REST_PORT                    | 6066          | Spark Master REST port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |

@@ -6,6 +6,6 @@ if [ -f "${SPARK_JAVA_OPTIONS_FILE}" ]; then
 	rm ${SPARK_JAVA_OPTIONS_FILE}
 fi
 
-echo "${EXT_JAVA_OPTIONS}" >> ${SPARK_JAVA_OPTIONS_FILE}
+echo "${GS_OPTIONS_EXT}" >> ${SPARK_JAVA_OPTIONS_FILE}
 
 /opt/gigaspaces/bin/gs.sh $*

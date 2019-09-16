@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ -z "$XAP_MANAGER_SERVERS" ]; then
-    if [ -z "$XAP_PUBLIC_HOST"  ]; then
-	    export XAP_MANAGER_SERVERS=$HOSTNAME
+if [ -z "$GS_MANAGER_SERVERS" ]; then
+    if [ -z "$GS_PUBLIC_HOST"  ]; then
+	    export GS_MANAGER_SERVERS=$HOSTNAME
     else
-        export XAP_MANAGER_SERVERS=$XAP_PUBLIC_HOST
+        export GS_MANAGER_SERVERS=$GS_PUBLIC_HOST
     fi
 fi
 
