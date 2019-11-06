@@ -108,10 +108,10 @@ The `GS_PUBLIC_HOST` environment variable complies with common practices of Dock
 
 The XAP Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
 
-| Environment Variable | Default Value | Description |
-| ---------------------|---------------|-------------|
-| GS_LOOKUP_PORT       | 4174          | Lookup discovery port [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
-| GS_LRMI_PORT         | 8200-8300     | Network protocol port range [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
+| Environment Variable      | Default Value | Description |
+| --------------------------|---------------|-------------|
+| GS_MULTICAST_LOOKUP_PORT  | 4174          | Lookup discovery port [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
+| GS_LRMI_PORT              | 8200-8300     | Network protocol port range [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
 
 # Running Other CLI Commands
 

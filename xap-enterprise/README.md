@@ -124,7 +124,7 @@ The XAP Enterprise Docker image uses the ports described in the table below. You
 
 | Environment Variable                      | Default Value | Description |
 | ------------------------------------------|---------------|-------------|
-| GS_LOOKUP_PORT                            | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
+| GS_MULTICAST_LOOKUP_PORT                  | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
 | GS_LRMI_PORT                              | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
 | GS_MANAGER_REST_PORT                      | 8090          | REST Manager API port [(learn more)](https://docs.gigaspaces.com/14.2/admin/xap-manager-rest.html) |
 | GS_WEBUI_PORT                             | 8099          | Web Managment Console port [(learn more)](https://docs.gigaspaces.com/14.2/admin/tools-web-ui.html) |

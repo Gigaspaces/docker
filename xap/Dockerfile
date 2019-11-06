@@ -22,12 +22,11 @@ ADD entrypoint.sh /opt/entrypoint.sh
 RUN apk add --no-cache nss
 # Configure and expose ports
 ENV GS_NIC_ADDRESS "#eth0:ip#"
-ENV GS_LOOKUP_PORT 4174
+ENV GS_MULTICAST_LOOKUP_PORT 4174
 ENV GS_LRMI_PORT 8200-8300
 ENV GS_RMI_REGISTRY_PORT 10098
 ENV GS_REST_PORT 8089
-EXPOSE ${GS_LOOKUP_PORT} ${GS_LRMI_PORT} ${GS_RMI_REGISTRY_PORT} ${GS_REST_PORT}
-ENV GS_OPTIONS_EXT "-Dcom.gs.multicast.discoveryPort=${GS_LOOKUP_PORT} -Dcom.gs.transport_protocol.lrmi.bind-port=${GS_LRMI_PORT} -Dcom.gigaspaces.start.rmi.registryPort=${GS_RMI_REGISTRY_PORT}"
+EXPOSE ${GS_MULTICAST_LOOKUP_PORT} ${GS_LRMI_PORT} ${GS_RMI_REGISTRY_PORT} ${GS_REST_PORT}
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["demo"]
