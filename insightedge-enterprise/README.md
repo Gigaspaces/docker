@@ -51,7 +51,7 @@ docker run gigaspaces/insightedge-enterprise version
 
 # How to Use this Image
 
-The InsightEdge Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The InsightEdge Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see [CLI documentation](https://docs.gigaspaces.com/latest/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 The InsightEdge Enterprise image requires a license key to run, which can be provided using the `GS_LICENSE` environment variable. You can use the `tryme` license, which enables you to use the full InsightEdge product for 24 hours (and then terminates the image), or you can  get a longer [evaluation license](http://gigaspaces.com/eval-license).
 
@@ -68,8 +68,8 @@ docker run --name test -it -e GS_LICENSE=tryme gigaspaces/insightedge-enterprise
 
 When running the InsightEdge Enterprise Docker image without arguments, a host is automatically started with the following components:
 
-* Platform Manager (mapped to port `8090`) [Learn more](https://docs.gigaspaces.com/14.2/admin/xap-manager.html)
-* Web Management Console (mapped to port `8099`) [Learn more](https://docs.gigaspaces.com/14.2/admin/tools-web-ui.html)
+* Platform Manager (mapped to port `8090`) [Learn more](https://docs.gigaspaces.com/latest/admin/xap-manager.html)
+* Web Management Console (mapped to port `8099`) [Learn more](https://docs.gigaspaces.com/latest/admin/tools-web-ui.html)
 * Spark master (mapped to port `8080`)
 * Spark worker (mapped to port `8081`)
 * Apache Zeppelin (mapped to port `9090`)
@@ -124,10 +124,10 @@ The InsightEdge Enterprise Docker image uses the ports described in the table be
 
 | Environment Variable                      | Default Value | Description |
 | ------------------------------------------|---------------|-------------|
-| GS_MULTICAST_LOOKUP_PORT                  | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
-| GS_LRMI_PORT                              | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
-| GS_MANAGER_REST_PORT                      | 8090          | REST Manager API port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/xap-manager-rest.html) |
-| GS_WEBUI_PORT                             | 8099          | Web Management Console port [(learn more)](https://docs.gigaspaces.com/14.2/admin/tools-web-ui.html) |
+| GS_MULTICAST_LOOKUP_PORT                  | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/latest/admin/network-lookup-service-configuration.html) |
+| GS_LRMI_PORT                              | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/latest/admin/tuning-communication-protocol.html) |
+| GS_MANAGER_REST_PORT                      | 8090          | REST Manager API port. [(learn more)](https://docs.gigaspaces.com/latest/admin/xap-manager-rest.html) |
+| GS_WEBUI_PORT                             | 8099          | Web Management Console port [(learn more)](https://docs.gigaspaces.com/latest/admin/tools-web-ui.html) |
 | GS_WEBSTER_HTTP_PORT                      | 8199          | Internal web service used as part of the application deployment process. |
 | GS_RMI_REGISTRY_PORT                      | 10098-10108   | Used to communicate with client application. |
 | GS_ZOOKEEPER_CLIENT_PORT                  | 2181          | Used for the Zookeeper client. |
@@ -136,7 +136,7 @@ The InsightEdge Enterprise Docker image uses the ports described in the table be
 | SPARK_MASTER_PORT                         | 7077          | Spark Master port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
 | SPARK_MASTER_WEBUI_PORT                   | 8080          | Spark Master Web UI port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
 | SPARK_MASTER_REST_PORT                    | 6066          | Spark Master REST port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
-| ZEPPELIN_PORT                             | 9090          | Insightedge Apache Zeppelin port. [(learn more)](https://docs.gigaspaces.com/14.2/started/insightedge-zeppelin.html) |
+| ZEPPELIN_PORT                             | 9090          | Insightedge Apache Zeppelin port. [(learn more)](https://docs.gigaspaces.com/latest/started/insightedge-zeppelin.html) |
 
 # Running Other CLI Commands
 
@@ -144,7 +144,7 @@ The Insightedge Enterprise Docker image utilizes GigaSpaces' command line interf
 
 If no arguments are specified after the image, the default `host run-agent --auto` command will be run.
 
-To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/15.0/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/latest/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 # Using a Different Java Version
