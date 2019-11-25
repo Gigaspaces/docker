@@ -101,7 +101,7 @@ Docker can run containers on the host network using the `--net=host` option with
 
 ### Configuring the Public Host
 
-By default, the XAP core communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `GS_PUBLIC_HOST` enviromnent variable to instruct InsightEdge Enterprise to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
+By default, the data grid's core communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `GS_PUBLIC_HOST` enviromnent variable, to instruct InsightEdge Enterprise to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
 docker run --name test -it -e GS_LICENSE=tryme -e GS_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/insightedge-enterprise
@@ -144,7 +144,7 @@ The Insightedge Enterprise Docker image utilizes GigaSpaces' command line interf
 
 If no arguments are specified after the image, the default `host run-agent --auto` command will be run.
 
-To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/15.0/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 # Using a Different Java Version
