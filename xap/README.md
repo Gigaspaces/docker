@@ -51,7 +51,7 @@ docker run gigaspaces/xap version
 
 # How to Use this Image
 
-The XAP Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/xap/12.3/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The XAP Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/xap/latest/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 
@@ -110,8 +110,8 @@ The XAP Docker image uses the ports described in the table below. You can change
 
 | Environment Variable      | Default Value | Description |
 | --------------------------|---------------|-------------|
-| GS_MULTICAST_LOOKUP_PORT  | 4174          | Lookup discovery port [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
-| GS_LRMI_PORT              | 8200-8300     | Network protocol port range [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
+| GS_MULTICAST_LOOKUP_PORT  | 4174          | Lookup discovery port [(learn more)](https://docs.gigaspaces.com/latest/admin/network-lookup-service-configuration.html) |
+| GS_LRMI_PORT              | 8200-8300     | Network protocol port range [(learn more)](https://docs.gigaspaces.com/latest/admin/tuning-communication-protocol.html) |
 
 # Running Other CLI Commands
 
@@ -119,7 +119,7 @@ The XAP Docker image utilizes GigaSpaces' command line interface (CLI). Any argu
 
 If no arguments are specified after the image, the default `demo` command will be run. 
 
-To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/latest/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 # Using a Different Java Version
