@@ -90,7 +90,7 @@ Docker can run containers on the host network using the `--net=host` option with
 
 ### Configuring the Public Host
 
-By default, the XAP core's communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `GS_PUBLIC_HOST` enviromnent variable to instruct InsightEdge to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
+By default, the data grid's core communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `GS_PUBLIC_HOST` enviromnent variable to instruct InsightEdge to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
 docker run --name test -it -e GS_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/insightedge
@@ -110,7 +110,7 @@ The InsightEdge Docker image uses the ports described in the table below. You ca
 
 | Environment Variable       | Default Value | Description |
 | ---------------------------|---------------|-------------|
-| GS_MULTICAST_LOOKUP_PORT   | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/14.2/admin/network-lookup-service-configuration.html) |
+| GS_MULTICAST_LOOKUP_PORT   | 4174          | Lookup discovery port. [(learn more)](https://docs.gigaspaces.com/latest/admin/network-lookup-service-configuration.html) |
 | GS_LRMI_PORT               | 8200-8300     | Network protocol port range. [(learn more)](https://docs.gigaspaces.com/14.2/admin/tuning-communication-protocol.html) |
 | SPARK_MASTER_PORT          | 7077          | Spark Master port. [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
 | SPARK_MASTER_WEBUI_PORT    | 8080          | Spark Master Web UI port.  [(learn more)](https://spark.apache.org/docs/0.8.0/spark-standalone.html) |
@@ -123,7 +123,7 @@ The InsightEdge Docker image utilizes GigaSpaces' command line interface (CLI). 
 
 If no arguments are specified after the image, the default `demo` command will be run.
 
-To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/14.2/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+To learn more about the command line interface, refer to the [CLI documentation](https://docs.gigaspaces.com/latest/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
 
 # Using a Different Java Version
