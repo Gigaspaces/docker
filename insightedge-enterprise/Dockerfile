@@ -60,6 +60,15 @@ RUN set -ex && \
     echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su && \
     chgrp root /etc/passwd && chmod ug+rw /etc/passwd
 
+ARG SPARK_K8S_CLIENT_VERSION=4.4.2
+RUN wget https://repo1.maven.org/maven2/io/fabric8/kubernetes-client/${SPARK_K8S_CLIENT_VERSION}/kubernetes-client-${SPARK_K8S_CLIENT_VERSION}.jar
+RUN wget https://repo1.maven.org/maven2/io/fabric8/kubernetes-model/${SPARK_K8S_CLIENT_VERSION}/kubernetes-model-${SPARK_K8S_CLIENT_VERSION}.jar
+RUN wget https://repo1.maven.org/maven2/io/fabric8/kubernetes-model-common/${SPARK_K8S_CLIENT_VERSION}/kubernetes-model-common-${SPARK_K8S_CLIENT_VERSION}.jar
+RUN rm ${SPARK_HOME}/jars/kubernetes-*.jar
+RUN mv kubernetes-client-${SPARK_K8S_CLIENT_VERSION}.jar ${SPARK_HOME}/jars/
+RUN mv kubernetes-model-${SPARK_K8S_CLIENT_VERSION}.jar ${SPARK_HOME}/jars/
+RUN mv kubernetes-model-common-${SPARK_K8S_CLIENT_VERSION}.jar ${SPARK_HOME}/jars/
+
 # Configure Classpath environment variables
 ENV INSIGHTEDGE_CLASSPATH "${GS_HOME}/insightedge/lib/*:${GS_HOME}/insightedge/lib/jdbc/*:${GS_HOME}/insightedge/lib/analytics-xtreme/*:${GS_HOME}/lib/required/*:${GS_HOME}/lib/optional/spatial/*"
 
