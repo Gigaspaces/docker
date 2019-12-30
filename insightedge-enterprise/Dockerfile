@@ -71,9 +71,7 @@ RUN mv kubernetes-model-common-${SPARK_K8S_CLIENT_VERSION}.jar ${SPARK_HOME}/jar
 
 # Configure Classpath environment variables
 ENV INSIGHTEDGE_CLASSPATH "${GS_HOME}/insightedge/lib/*:${GS_HOME}/insightedge/lib/jdbc/*:${GS_HOME}/insightedge/lib/analytics-xtreme/*:${GS_HOME}/lib/required/*:${GS_HOME}/lib/optional/spatial/*"
-
-ENV SPARK_CLASSPATH "${SPARK_CLASSPATH}:${INSIGHTEDGE_CLASSPATH}"
-ENV SPARK_DIST_CLASSPATH "${SPARK_CLASSPATH}"
+ENV SPARK_DIST_CLASSPATH "${SPARK_DIST_CLASSPATH}:${INSIGHTEDGE_CLASSPATH}"
 
 # Configure InsightEdge application's environment variables
 ENV INSIGHTEDGE_SPACE_NAME insightedge-space
