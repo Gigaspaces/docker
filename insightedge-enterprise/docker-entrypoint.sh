@@ -7,6 +7,7 @@ CMD_ARGS="$1"
 case "$CMD_ARGS" in
   driver|executor|init)
     # Delegate arguments to Spark entrypoint
+    export SPARK_CLASSPATH="${SPARK_CLASSPATH}:${SPARK_DIST_CLASSPATH}"
     CMD=(
       "/opt/spark_entrypoint.sh"
       "$@"
