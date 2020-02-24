@@ -2,10 +2,10 @@ ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8-alpine
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=xap
-ARG GS_VERSION=15.2.0-k8s-scaling
-ARG GS_MILESTONE=m13
+ARG GS_VERSION=15.2.0
+ARG GS_MILESTONE=m13-k8s-scaling
 ARG GS_BUILD=20700-87
-ARG GS_BUILD_NAME=15.2.0-k8s-scaling-m13-mon-4
+ARG GS_BUILD_NAME=15.2.0-m13-k8s-scaling-mon-5
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
