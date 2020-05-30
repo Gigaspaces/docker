@@ -1,22 +1,32 @@
 name: DockerHub-CI
 
-# Controls when the action will run. Triggers the workflow on push 
-# events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches:
+    - master
+    - latest
+    tags: 
+    - release-*
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  dockerhub-ci:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Map git ref -> docker tag
+        run: |
+          # Determine docker tag based on git ref
+          if [[ $GITHUB_REF == refs/heads/master ]]; then
+            TAG="master"
+          elif [[ $GITHUB_REF == refs/heads/latest ]]; then
+            TAG="latest"
+          elif [[ $GITHUB_REF == refs/tags/release-* ]]; then
+            TAG=${GITHUB_REF#refs/tags/release-}
+          fi
+          echo Mapped git ref $GITHUB_REF to docker tag $TAG
+          # export result to environment variable available to next steps
+          echo ::set-env name=GS_DOCKER_TAG::$TAG
       - name: Build and push xap-enterprise
         uses: docker/build-push-action@v1
         with:
@@ -24,7 +34,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           path: ./xap-enterprise
           repository: gigaspaces/xap-enterprise
-          tags: niv-test
+          tags: $GS_DOCKER_TAG
       - name: Build and push insightedge-enterprise
         uses: docker/build-push-action@v1
         with:
@@ -32,4 +42,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           path: ./insightedge-enterprise
           repository: gigaspaces/insightedge-enterprise
-          tags: niv-test
+          tags: $GS_DOCKER_TAG
