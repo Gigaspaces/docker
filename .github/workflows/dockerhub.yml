@@ -18,7 +18,7 @@ jobs:
         run: |
           # Determine docker tag based on git ref
           if [[ $GITHUB_REF == refs/heads/master ]]; then
-            TAG="master"
+            TAG="dev-latest"
           elif [[ $GITHUB_REF == refs/heads/latest ]]; then
             TAG="latest"
           elif [[ $GITHUB_REF == refs/tags/release-* ]]; then
@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           path: ./xap-enterprise
           repository: gigaspaces/xap-enterprise
-          tags: $GS_DOCKER_TAG
+          tags: ${{ env.GS_DOCKER_TAG }}
       - name: Build and push insightedge-enterprise
         uses: docker/build-push-action@v1
         with:
@@ -42,4 +42,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           path: ./insightedge-enterprise
           repository: gigaspaces/insightedge-enterprise
-          tags: $GS_DOCKER_TAG
+          tags:  ${{ env.GS_DOCKER_TAG }}
