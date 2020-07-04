@@ -5,7 +5,7 @@ ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=15.5.0
 ARG GS_MILESTONE=m13
 ARG GS_BUILD=20700-87
-ARG GS_BUILD_NAME=15.5.0-m13-fri-3
+ARG GS_BUILD_NAME=15.5.0-m13-sat-4
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
