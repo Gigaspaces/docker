@@ -3,9 +3,9 @@ ARG JAVA_TAG=8-alpine
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=xap
 ARG GS_VERSION=15.8.0
-ARG GS_MILESTONE=m7-java-11
+ARG GS_MILESTONE=m8
 ARG GS_BUILD=20700-87
-ARG GS_BUILD_NAME=15.8.0-m7-java-11-thu-2
+ARG GS_BUILD_NAME=15.8.0-m8-thu-3
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
