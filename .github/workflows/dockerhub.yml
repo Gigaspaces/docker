@@ -29,7 +29,7 @@ jobs:
           fi
           echo Mapped git ref $GITHUB_REF to docker tag $TAG
           # export result to environment variable available to next steps
-          echo ::set-env name=GS_DOCKER_TAG::$TAG
+          echo "GS_DOCKER_TAG=$TAG" >> $GITHUB_ENV
       - name: Build and push ${{ matrix.repo }}
         uses: docker/build-push-action@v1
         with:
