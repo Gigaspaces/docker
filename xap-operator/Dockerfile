@@ -14,7 +14,7 @@ WORKDIR ${GS_HOME}
 
 COPY gigaspaces-xap-enterprise-15.8.0-m15-tue-9.zip /tmp/gigaspaces.zip
 RUN apk --no-cache add openssl wget unzip bash libc6-compat &&\
-#    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
+    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME} &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
