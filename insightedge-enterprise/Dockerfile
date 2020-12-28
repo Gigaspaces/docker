@@ -9,6 +9,8 @@ ARG GS_BUILD_NAME=15.8.0-m18-sun-7
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
+ENV GS_PRODUCT ${GS_PRODUCT}
+
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 RUN apk --no-cache add openssl wget unzip &&\
