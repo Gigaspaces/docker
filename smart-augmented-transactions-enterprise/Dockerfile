@@ -1,7 +1,7 @@
 ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8-alpine
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
-ARG GS_PRODUCT=insightedge
+ARG GS_PRODUCT=smart-augmented-transactions
 ARG GS_VERSION=15.8.0
 ARG GS_BUILD_NAME=15.8.0-rc1-sat-5
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}

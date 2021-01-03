@@ -1,11 +1,11 @@
 ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8-alpine
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
-ARG GS_PRODUCT=xap
+ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=15.8.0
 ARG GS_BUILD_NAME=15.8.0-rc1-sat-5
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
-ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/xap/${GS_VERSION}/${GS_NAME}.zip
+ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
 
