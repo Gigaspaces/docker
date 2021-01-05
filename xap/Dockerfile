@@ -5,7 +5,7 @@ ARG GS_PRODUCT=xap
 ARG GS_VERSION=15.8.0
 ARG GS_MILESTONE=rc1
 ARG GS_BUILD=20700-87
-ARG GS_BUILD_NAME=15.8.0-rc1-mon-18
+ARG GS_BUILD_NAME=15.8.0-rc1-tue-19
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
