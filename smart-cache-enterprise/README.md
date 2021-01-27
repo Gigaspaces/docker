@@ -4,14 +4,15 @@
 
 ## What is Smart Cache Enterprise?
 
-Smart Cache Enterprise is a cloud-native, high-throughput and low-latency application fabric that empowers real-time, event-driven microservices and distributed applications for Internet-scale innovation. Smart Cache Enterprise scales with your business needs, from simple data processing to complex transactional workloads, all the way to leveraging hybrid storage and data center tiers.
+Smart Cache is the fastest, most scalable, distributed caching tier that runs on any operational data source, to accelerate your digital applications and fuel real-time reporting and BI. Smart Cache is optimized for rapidly changing data and multi-criteria queries, and is fully SQL compatible.
 
-
-Smart Cache Enterprise provides the following advantages:
-
-- Enables your complete app to run in its entirety on a single platform, with all the tiers collapsed into one container.
-- Gives you fast data access by storing ALL your data in-memory, and ensures high availability using in-memory backup within each container.
-- Scales your app automatically and on demand.
+Benefits & Features: 
+* Native Multi-Criteria Queries for Extreme Performance - unlike Key-Value solutions, Smart Cache supports an unlimited number of advanced indexes such as ranges, compound, text and more, for optimal performance, with full SQL compliance.
+* Business Driven Caching Policy for Optimal Optimization of Cost and Performance - gain control over your data and keep your most important data in RAM. With advanced business-driven policies, you’re no longer limited to LRU tiering logic.
+* AIOps Autonomous Scaling - automatic triggers to scale either up or out for transactional and analytical workloads, over Kubernetes, OpenShift or GigaSpaces ElasticGrid. Scaling is performed in a rolling manner with no downtime or performance impact.
+* No Code, One-Click Database Integration - with just one click, the platform scans the database and its metadata, maps its data modeling to the GigaSpaces store and defines its indexing and partitioning schema to eliminate weeks of manual work and human errors.
+Fast Server-Side Aggregations - Smart Cache performs the entire aggregation activity distributed in-memory on the server side, avoiding data retrieval back to the * client side. Aggregation is performed on relevant data only, regardless of total data size.
+* Never Lose Writes - achieve strong data consistency. Unlike eventual consistency cache solutions, Smart Cache ensures complete data integrity, which means data is never lost. At any load, across any environment.
 
 To learn more about GigaSpaces products, visit the [website](https://www.gigaspaces.com).
 

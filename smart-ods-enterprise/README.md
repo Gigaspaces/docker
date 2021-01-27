@@ -4,14 +4,15 @@
 
 ## What is Smart ODS Enterprise?
 
-Smart ODS Enterprise is a cloud-native, high-throughput and low-latency application fabric that empowers real-time, event-driven microservices and distributed applications for Internet-scale innovation. Smart ODS Enterprise scales with your business needs, from simple data processing to complex transactional workloads, all the way to leveraging hybrid storage and data center tiers.
+Smart ODS is a distributed in-memory Digital Integration Hub (DIH), with unparalleled low-latency, high-performance and scale that aggregates and offloads from your multiple back-end systems of record and data stores on-premise and in the cloud. With a unified API layer, you can decouple the digital applications from your disparate systems of record to increase agility and ensure always-on services.
 
-
-Smart ODS Enterprise provides the following advantages:
-
-- Enables your complete app to run in its entirety on a single platform, with all the tiers collapsed into one container.
-- Gives you fast data access by storing ALL your data in-memory, and ensures high availability using in-memory backup within each container.
-- Scales your app automatically and on demand.
+Benefits & Features: 
+* Extreme In-Memory Performance - unparalled speed, high-throughput transaction (ACID), and analytical processing to accelerate applications, BI and analytics; fueled by distributed in-memory speed, the colocation of business logic and data, secondary indexing and server-side aggregations.
+* AIOps for Autonomous Elasticity and Scale - automatic triggers to elastically scale either up or out for transactional and analytical workloads, based on the CPU and RAM utilization. The scaling process is done in a rolling manner without downtime while the cache remains fully operational.
+* Business Policy-Driven Storage - intelligently manage your data in multiple storage tiers – hot on RAM, warm on SSD and cold on your data store, with an automated data lifecycle driven by business-policy logic and actual usage patterns. You’re no longer limited to LRU tiering logic.
+* Colocated Microservices - deploy microservices colocated in memory to achieve extreme performance and agility. High ingestion of data streams and events with a real-time processing engine lets you execute on the server complex transformations and data enrichment in a distributed manner.
+* No Code, One-Click Integration - with just one click, the platform scans the database and its metadata, maps its data modeling to the GigaSpaces store and defines its indexing and partitioning schema to eliminate weeks of manual work and human errors. You can also use a built-in CDC that connects directly to your systems of records.
+* Always-On Services - enterprise-grade and highly available with three levels of data persistence, including in-memory, disk/database persistency, and cross-region replication. Self-healing functionality as well as upgrades and scaling without downtime.
 
 To learn more about GigaSpaces products, visit the [website](https://www.gigaspaces.com).
 

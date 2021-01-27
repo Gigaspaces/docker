@@ -4,14 +4,15 @@
 
 ## What is Smart Augmented Transactions Enterprise?
 
-The Smart Augmented Transactions platform, a combination of the XAP in-memory data grid and an open-source analytics ecosystem, is an in-memory insight platform that supports fast-data analytics, artificial intelligence and real-time applications. Customers can use this platform to develop their own systems that provide instant data-driven insights with time-to-analytics at a sub-second scale. Smart Augmented Transactions also enables hyperscaling analytics from SQL, and streaming to machine learning via Apache Spark.
+Smart Augmented Transactions provides you with real-time feedback on business operations, rapid innovation on insight-driven workloads, and the ability to unlock live operational intelligence across the business. The in-memory computing platform delivers the necessary components of a cloud-native translytical architecture that combines transactions and analytics workloads in a single platform to empower real-time analytics immediately over transactional data.
 
-Smart Augmented Transactions Enterprise provides the following advantages:
-
-- Enables your complete app to run in its entirety on a single platform, with all the tiers collapsed into one container.
-- Gives you fast data access by storing ALL your data in-memory, and ensures high availability using in-memory backup within each container.
-- Scales your app automatically and on demand.
-- Gives extreme performance with ultra-low latency, high-throughput transactions and stream processing, due to the co-location of applications and analytics. All of this functionality is available in a cloud-native, infrastructure-agnostic deployment for hybrid cloud and on-premises environments.
+Benefits & Features: 
+* Enrich Real-Time Analytics with Historical Context - Smart Augmented Transactions powers event-triggered real-time analytics on streaming data enriched with historical context to help your insight-driven organization address time-sensitive decisions – enhancing business operations, regulatory compliance and customer experience.
+* Out-of-the-Box Machine and Deep Learning - Contains the frameworks for scalable data-driven solutions including SQL, Spark, streaming, ML and deep learning. Your applications leverage faster and smarter insights from ML models running on any data source whether structured, unstructured or semi-structured.
+* Enhanced Pushdown Predicates - Smart Augmented Transactions enhances the Agile Spark pushdown predicate capability by leveraging our native advanced indexing mechanism, to retrieve only relevant data entries when running a query (filter). This ability to filter directly on the source (instead of on the target as is done in the vanilla Apache Spark architecture) dramatically improves performance and reduces network overhead.
+* Fastest In-Memory Performance - Other in-memory solutions aggregate data on the client-side, but with InsightEdge Smart Augmented Transactions, analytics are distributed on the server-side in the same memory space as the data to accelerate performance and reduce networking and serialization overhead. The platform delivers high throughput transaction and stream processing supporting millions of IOPS.
+* Always-On Services - Enterprise-grade and highly available with disk/database persistence, disaster recovery, self-healing functionality as well as upgrades and scaling without downtime. Geo-redundancy and fast data replication for disaster recovery. Data security and consistency is ensured between data centers and data stores including hybrid and multi-cloud deployments.
+* AIOps for Autonomous Elasticity and Scale - Automatic triggers to elastically scale either up or out for transactional and analytical workloads, based on the CPU and RAM utilization. The scaling process is done in a rolling manner without downtime while the cache remains fully operational. Data is automatically stored in multiple tiers, RAM, SSD or database, according to the defined business policy to optimize business results and TCO.
 
 To learn more about GigaSpaces products, visit the [website](https://www.gigaspaces.com).
 
