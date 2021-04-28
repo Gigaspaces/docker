@@ -47,7 +47,7 @@ RUN chmod -R 777 ${GS_HOME}
 
 RUN addgroup -S gigaspaces && adduser -S gigaspaces -G gigaspaces --uid 1000
 USER gigaspaces
-
+RUN mkdir -p ${GS_HOME}/work
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["host", "run-agent", "--auto"]
