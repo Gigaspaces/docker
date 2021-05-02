@@ -49,8 +49,6 @@ RUN  chown -R gigaspaces:gigaspaces ${GS_HOME}
 #RUN chmod 777 ${GS_HOME}
 USER gigaspaces
 RUN mkdir ${GS_HOME}/work
-RUN mkdir ${GS_HOME}/work/memoryxtend
-RUN chmod 777 ${GS_HOME}/work
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["host", "run-agent", "--auto"]
