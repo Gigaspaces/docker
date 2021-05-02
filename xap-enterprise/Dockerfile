@@ -43,11 +43,11 @@ ENV GS_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
 EXPOSE ${GS_MULTICAST_LOOKUP_PORT} ${GS_LRMI_PORT} ${GS_WEBUI_PORT} ${GS_MANAGER_REST_PORT} ${GS_WEBUI_PORT} ${GS_WEBSTER_HTTP_PORT} ${GS_RMI_REGISTRY_PORT} ${GS_REST_PORT} ${GS_ZOOKEEPER_CLIENT_PORT} ${GS_MANAGER_ZOOKEEPER_DISCOVERY_PORT}  ${GS_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT}
 
 
-#USER root
-RUN addgroup --gid 2000 -S gigaspaces && adduser -S gigaspaces -G gigaspaces --uid 1000
-RUN  chown -R gigaspaces:gigaspaces ${GS_HOME}
-#RUN chmod 777 ${GS_HOME}
-USER gigaspaces
+RUN addgroup --gid 2000 -S gs_group &&\
+    adduser -S gs_user -G gs_group --uid 1000 &&\
+    chown -R gs_user:gs_group ${GS_HOME}
+
+USER gs_user
 RUN mkdir ${GS_HOME}/work
 
 ENTRYPOINT ["/opt/entrypoint.sh"]

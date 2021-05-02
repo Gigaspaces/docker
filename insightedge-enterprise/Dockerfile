@@ -81,6 +81,14 @@ ADD docker-entrypoint.sh /opt/docker-entrypoint.sh
 ADD entrypoint.sh /opt/entrypoint.sh
 RUN cp /opt/gigaspaces/insightedge/spark/kubernetes/dockerfiles/spark/entrypoint.sh /opt/spark_entrypoint.sh
 
+
+RUN addgroup --gid 2000 -S gs_group &&\
+    adduser -S gs_user -G gs_group --uid 1000 &&\
+    chown -R gs_user:gs_group ${GS_HOME}
+
+USER gs_user
+RUN mkdir ${GS_HOME}/work
+
 # Configure Docker entrypoint
 ENTRYPOINT [ "/opt/docker-entrypoint.sh" ]
 CMD ["host", "run-agent", "--auto"]
