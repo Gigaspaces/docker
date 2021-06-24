@@ -1,6 +1,7 @@
 ARG BASE_IMAGE=registry.access.redhat.com/ubi8/ubi-minimal
 ARG BASE_TAG=8.4
 FROM ${BASE_IMAGE}:${BASE_TAG}
+ARG JAVA_VERSION=java-1.8.0-openjdk
 ARG GS_PRODUCT=xap
 ARG GS_VERSION=16.0.0
 ARG GS_BUILD_NAME=16.0.0-m21-wed-15
@@ -15,7 +16,7 @@ WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 USER root
 
-RUN microdnf install java-1.8.0-openjdk-1.8.0.292.b10-1.el8_4.x86_64 jq shadow-utils hostname bind-utils nss wget unzip &&\
+RUN microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip &&\
     wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
