@@ -9,8 +9,7 @@ ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
-ENV KUBERNETES_CLINET_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-java-client.jar
-ENV KUBERNETES_JAVA_LIB_VERSION=5.0.0
+ENV KUBERNETES_CLINET_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-java-client-5.0.0.jar
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
