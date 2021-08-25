@@ -1,10 +1,10 @@
-## InsightEdge Smart ODS
+## InsightEdge Smart DIH
 
 ![InsightEdge logo](https://docs.gigaspaces.com/images/logo-insightedge-color-small.png)
 
-## What is Smart ODS Enterprise?
+## What is Smart DIH Enterprise?
 
-Smart ODS is a distributed in-memory Digital Integration Hub (DIH), with unparalleled low-latency, high-performance and scale that aggregates and offloads from your multiple back-end systems of record and data stores on-premise and in the cloud. With a unified API layer, you can decouple the digital applications from your disparate systems of record to increase agility and ensure always-on services.
+Smart DIH is a distributed in-memory Digital Integration Hub (DIH), with unparalleled low-latency, high-performance and scale that aggregates and offloads from your multiple back-end systems of record and data stores on-premise and in the cloud. With a unified API layer, you can decouple the digital applications from your disparate systems of record to increase agility and ensure always-on services.
 
 Benefits & Features: 
 * Extreme In-Memory Performance - unparalled speed, high-throughput transaction (ACID), and analytical processing to accelerate applications, BI and analytics; fueled by distributed in-memory speed, the colocation of business logic and data, secondary indexing and server-side aggregations.
@@ -38,37 +38,37 @@ To learn more about GigaSpaces products, visit the [website](https://www.gigaspa
 
 # Getting Started
 
-To test the Smart ODS Enterprise Docker image, run the following in your command line to display a help screen with all the available commands: 
+To test the Smart DIH Enterprise Docker image, run the following in your command line to display a help screen with all the available commands: 
 
 ```
-docker run gigaspaces/smart-ods-enterprise --help
+docker run gigaspaces/smart-dih-enterprise --help
 ```
 
 
  For example, the `version` command prints version information:
 
 ```
-docker run gigaspaces/smart-ods-enterprise version
+docker run gigaspaces/smart-dih-enterprise version
 ```
 
 # How to Use this Image
 
-The Smart ODS Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/latest/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
+The Smart DIH Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). To learn more about the command line interface, see the [CLI documentation](https://docs.gigaspaces.com/latest/admin/tools-cli.html "CLI documentation"), or use the `--help` option.
 
-The Smart ODS Enterprise image requires a license key to run, which can be provided using the `GS_LICENSE` environment variable. You can use the `tryme` license, which enables you to use the full Smart ODS product for 24 hours (and then terminates the image), or you can  get a longer [evaluation license](http://gigaspaces.com/eval-license).
+The Smart DIH Enterprise image requires a license key to run, which can be provided using the `GS_LICENSE` environment variable. You can use the `tryme` license, which enables you to use the full Smart DIH product for 24 hours (and then terminates the image), or you can  get a longer [evaluation license](http://gigaspaces.com/eval-license).
 
 
 # Running Your First Container
 
-The simplest and fastest way to start working with Smart ODS Enterprise is to get a single instance up and running on your local machine.  After the instance is initiated, you can start exploring the available features and capabilities.
+The simplest and fastest way to start working with Smart DIH Enterprise is to get a single instance up and running on your local machine.  After the instance is initiated, you can start exploring the available features and capabilities.
 
 To run a single host on your machine:
 
 ```
-docker run --name test -it -e GS_LICENSE=tryme -p 8090:8090 -p 8099:8099 gigaspaces/smart-ods-enterprise
+docker run --name test -it -e GS_LICENSE=tryme -p 8090:8090 -p 8099:8099 gigaspaces/smart-dih-enterprise
 ```
 
-When running the Smart ODS Enterprise Docker image without arguments, a host is automatically started with the following components:
+When running the Smart DIH Enterprise Docker image without arguments, a host is automatically started with the following components:
 
 * Platform Manager (mapped to port `8090`) [Learn more](https://docs.gigaspaces.com/latest/admin/xap-manager.html)
 * Web Management Console (mapped to port `8099`) [Learn more](https://docs.gigaspaces.com/latest/admin/tools-web-ui.html)
@@ -100,28 +100,28 @@ Docker can run containers on the host network using the `--net=host` option with
 
 ### Configuring the Public Host
 
-By default, the GigaSpaces communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `GS_PUBLIC_HOST` enviromnent variable to instruct Smart ODS Enterprise to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
+By default, the GigaSpaces communication protocol (LRMI) uses the same network interface for both binding and publishing. You can modify this, using the `GS_PUBLIC_HOST` enviromnent variable to instruct Smart DIH Enterprise to publish itself using a different network address, for example the host's network address. In this case, you'll have to expose the ports listed in the [Ports](#ports) section from the Docker container to the host. For example:
 
 ```
-docker run --name test -it -e GS_LICENSE=tryme -e GS_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/smart-ods-enterprise
+docker run --name test -it -e GS_LICENSE=tryme -e GS_PUBLIC_HOST=<your-host-ip-or-name> -p 4174:4174 -p 8200-8300:8200-8300 gigaspaces/smart-dih-enterprise
 ```
 
 # Running a Production Cluster on Multiple Hosts
 
-When running Smart ODS Enterprise in Docker containers on multiple hosts, you need to either configure `GS_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
+When running Smart DIH Enterprise in Docker containers on multiple hosts, you need to either configure `GS_PUBLIC_HOST` or use the `--net=host` option as described above, so that containers on different hosts can interact with each other.
 
-The `GS_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The Smart ODS Docker image supports both options, so choose the one that best suits your needs.
+The `GS_PUBLIC_HOST` environment variable complies with common practices of Docker usage, and maintains image isolation. However, as per the Docker documentation, to get optimal performance it is recommended to use the `--net=host` option, which uses the host network and removes the extra network hop. The Smart DIH Docker image supports both options, so choose the one that best suits your needs.
 
 ## Beyond the Basics
 
 # Configuring the GigaSpaces Manager Server IP Address
 
- When running Smart ODS Enterprise on multiple hosts, you can configure the GigaSpaces Manager Server IP address in your network. 
+ When running Smart DIH Enterprise on multiple hosts, you can configure the GigaSpaces Manager Server IP address in your network. 
 `GS_MANAGER_SERVERS=host1,host2,host3` by default is the local manager.
 
 # Ports
 
-The Smart ODS Enterprise Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
+The Smart DIH Enterprise Docker image uses the ports described in the table below. You can change each port using the respective environment variable, or map it to a different port using the `-p` option in `docker run`. For example, `-p 5174:4174` maps the lookup discovery port to a different port, but maintains the same port within the container.
 
 | Environment Variable                      | Default Value | Description |
 | ------------------------------------------|---------------|-------------|
@@ -138,7 +138,7 @@ The Smart ODS Enterprise Docker image uses the ports described in the table belo
 
 # Running Other CLI Commands
 
-The Smart ODS Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line.
+The Smart DIH Enterprise Docker image utilizes GigaSpaces' command line interface (CLI). Any arguments following the image name are passed to the command line.
 
 If no arguments are specified after the image, the default `host run-agent --auto` command will be run.
 
@@ -146,9 +146,9 @@ To learn more about the command line interface, refer to the [CLI documentation]
 
 # Using a Different Java Version
 
-This Smart ODS Enterprise Docker image is based on the official [openjdk](https://hub.docker.com/_/openjdk/) image, and uses Java version 8. To use a different Java version, you have to build a new image using the `JAVA_TAG` build argument. For example:
+This Smart DIH Enterprise Docker image is based on the official [openjdk](https://hub.docker.com/_/openjdk/) image, and uses Java version 8. To use a different Java version, you have to build a new image using the `JAVA_TAG` build argument. For example:
 ```
-docker build --build-arg JAVA_TAG=9 -t gigaspaces/smart-ods-enterprise:openjdk-9 .
+docker build --build-arg JAVA_TAG=9 -t gigaspaces/smart-dih-enterprise:openjdk-9 .
 ```
 If you're not sure which versions are available, refer to the [supported tags](https://hub.docker.com/r/library/openjdk/tags/) page.
 
