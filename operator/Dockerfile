@@ -15,13 +15,16 @@ WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 USER root
 
-RUN microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip &&\
+RUN microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip curl ca-certificates &&\
     wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
     rm -f /tmp/gigaspaces.zip &&\
-    wget ${KUBERNETES_CLINET_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar
+    wget ${KUBERNETES_CLINET_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar \&&
+    curl -L https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-amd64 -o /usr/local/bin/helm &&\
+    chmod +x /usr/local/bin/helm \
+
 ADD entrypoint.sh /opt/entrypoint.sh
 
 RUN echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill
