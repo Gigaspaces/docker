@@ -147,7 +147,7 @@ To learn more about the command line interface, refer to the [CLI documentation]
 
 This XAP Enterprise Docker image is based on the official [openjdk](https://hub.docker.com/_/openjdk/) image, and uses Java version 8. To use a different Java version, you have to build a new image using the `JAVA_TAG` build argument. For example:
 ```
-docker build --build-arg JAVA_TAG=9 -t gigaspaces/xap-enterprise:openjdk-9 .
+docker build --build-arg JAVA_VERSION=java-11-openjdk-devel -t gigaspaces/xap-enterprise:openjdk-9 .
 ```
 If you're not sure which versions are available, refer to the [supported tags](https://hub.docker.com/r/library/openjdk/tags/) page.
 
