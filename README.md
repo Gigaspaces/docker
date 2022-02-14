@@ -1,6 +1,6 @@
 ![DockerHub-CI](https://github.com/Gigaspaces/docker/workflows/DockerHub-CI/badge.svg)
 
-##  GigaSpaces Docker Images
+##  GigaSpaces Docker Images.
 
 The InsightEdge platform, a combination of the XAP in-memory data grid and an open-source analytics ecosystem, is an in-memory insight platform that supports fast-data analytics, artificial intelligence and real-time applications. Customers can use this platform to develop their own systems that provide instant data-driven insights with time-to-analytics at a sub-second scale. InsightEdge also enables hyperscaling analytics from SQL, and streaming to machine learning via Apache Spark.
 
