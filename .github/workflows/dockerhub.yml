@@ -1,40 +1,40 @@
 name: DockerHub-CI
+depricated since docker step moved into gigajenkins by oren sultan for undo changes uncoment following lines
+# # on:
+# #   push:
+# #     branches:
+# #     - master
+# #     - latest
+# #     tags: 
+# #     - release-*
 
-on:
-  push:
-    branches:
-    - master
-    - latest
-    tags: 
-    - release-*
-
-jobs:
-  dockerhub-ci:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        repo: [xap-enterprise, smart-cache-enterprise, smart-dih-enterprise, insightedge-enterprise, operator]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Map git ref -> docker tag
-        run: |
-          # Determine docker tag based on git ref
-          if [[ $GITHUB_REF == refs/heads/master ]]; then
-            TAG="dev-latest"
-          elif [[ $GITHUB_REF == refs/heads/latest ]]; then
-            TAG="latest"
-          elif [[ $GITHUB_REF == refs/tags/release-* ]]; then
-            TAG=${GITHUB_REF#refs/tags/release-}
-          fi
-          echo Mapped git ref $GITHUB_REF to docker tag $TAG
-          # export result to environment variable available to next steps
-          echo "GS_DOCKER_TAG=$TAG" >> $GITHUB_ENV
-      - name: Build and push ${{ matrix.repo }}
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          path: ./${{ matrix.repo }}
-          repository: gigaspaces/${{ matrix.repo }}
-          tags:  ${{ env.GS_DOCKER_TAG }}
+# jobs:
+#   dockerhub-ci:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         repo: [xap-enterprise, smart-cache-enterprise, smart-dih-enterprise, insightedge-enterprise, operator]
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Map git ref -> docker tag
+#         run: |
+#           # Determine docker tag based on git ref
+#           if [[ $GITHUB_REF == refs/heads/master ]]; then
+#             TAG="dev-latest"
+#           elif [[ $GITHUB_REF == refs/heads/latest ]]; then
+#             TAG="latest"
+#           elif [[ $GITHUB_REF == refs/tags/release-* ]]; then
+#             TAG=${GITHUB_REF#refs/tags/release-}
+#           fi
+#           echo Mapped git ref $GITHUB_REF to docker tag $TAG
+#           # export result to environment variable available to next steps
+#           echo "GS_DOCKER_TAG=$TAG" >> $GITHUB_ENV
+#       - name: Build and push ${{ matrix.repo }}
+#         uses: docker/build-push-action@v1
+#         with:
+#           username: ${{ secrets.DOCKER_USERNAME }}
+#           password: ${{ secrets.DOCKER_PASSWORD }}
+#           path: ./${{ matrix.repo }}
+#           repository: gigaspaces/${{ matrix.repo }}
+#           tags:  ${{ env.GS_DOCKER_TAG }}
