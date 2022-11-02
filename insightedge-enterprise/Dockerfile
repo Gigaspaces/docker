@@ -2,8 +2,8 @@ ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8-alpine
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=insightedge
-ARG GS_VERSION=16.3.0
-ARG GS_BUILD_NAME=16.3.0-PIC-833-setting-up-volumes-for-tiered-storage-wed-175
+ARG GS_VERSION=16.2.1
+ARG GS_BUILD_NAME=16.2.1-PIC-1218-pu-zoombie-wed-177
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
