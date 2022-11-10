@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE}:${BASE_TAG}
 ARG JAVA_VERSION=java-1.8.0-openjdk
 ARG GS_PRODUCT=xap
 ARG GS_VERSION=16.3.0
-ARG GS_BUILD_NAME=16.3.0-dev-sapir-fix-wrongRoutingTest-thu-210
+ARG GS_BUILD_NAME=16.3.0-PIC-944-k8stests-wait-for-termination-thu-211
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/xap/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
