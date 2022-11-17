@@ -3,7 +3,7 @@ ARG JAVA_TAG=8-alpine
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=16.3.0
-ARG GS_BUILD_NAME=16.3.0-m2-wed-214
+ARG GS_BUILD_NAME=16.3.0-PIC-1279-dih-charts-thu-233
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
