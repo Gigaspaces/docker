@@ -5,6 +5,8 @@ ARG JAVA_VERSION=java-1.8.0-openjdk
 ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=16.3.0
 ARG GS_BUILD_NAME=16.3.0-m2
+ARG GS_BUCKET
+ENV GS_BUCKET $GS_BUCKET
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://${GS_BUCKET}/insightedge/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
