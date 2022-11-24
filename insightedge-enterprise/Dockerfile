@@ -5,7 +5,7 @@ ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=16.3.0
 ARG GS_BUILD_NAME=16.3.0-m2
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
-ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
+ARG GS_URL=https://${GS_BUCKET}/insightedge/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
 
