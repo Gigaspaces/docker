@@ -7,7 +7,7 @@ ARG GS_BUILD_NAME=16.3.0-m2
 ARG GS_BUCKET
 ENV GS_BUCKET $GS_BUCKET
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
-ARG GS_URL=https://${GS_BUCKET}.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
+ARG GS_URL=https://${GS_BUCKET}.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
 
