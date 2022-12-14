@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE}:${BASE_TAG}
 ARG JAVA_VERSION=java-11-openjdk
 ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=15.8.1
-ARG GS_BUILD_NAME=15.8.1-patch-a-3
+ARG GS_BUILD_NAME=15.8.1-patch-a-test-3
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
