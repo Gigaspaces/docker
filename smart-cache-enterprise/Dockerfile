@@ -1,7 +1,7 @@
 ARG BASE_IMAGE=registry.access.redhat.com/ubi8/ubi-minimal
 ARG BASE_TAG=8.4
 FROM ${BASE_IMAGE}:${BASE_TAG}
-ARG JAVA_VERSION=java-1.8.0-openjdk
+ARG JAVA_VERSION=java-11-openjdk
 ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=16.3.0
 ARG GS_BUILD_NAME=16.3.0-PIC-1495-dev-moran-tue-319
