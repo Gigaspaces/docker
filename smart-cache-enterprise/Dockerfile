@@ -2,7 +2,7 @@ ARG BASE_IMAGE=registry.access.redhat.com/ubi8/ubi-minimal
 ARG BASE_TAG=8.4
 FROM ${BASE_IMAGE}:${BASE_TAG}
 ARG JAVA_VERSION=java-11-openjdk
-ARG GS_PRODUCT=smart-cache
+ARG GS_PRODUCT=xap
 ARG GS_VERSION=16.3.0
 ARG GS_BUILD_NAME=16.3.0-m9-sun-345
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
