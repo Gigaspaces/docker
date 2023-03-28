@@ -6,7 +6,7 @@ ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=16.3.0
 ARG GS_BUILD_NAME=16.3.0-secyrity-svc-fix-npe-mon-490
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
-ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
+ARG GS_URL=https://gs-releases-us-east-1.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
 ENV KUBERNETES_CLINET_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-java-client-5.0.0.jar
