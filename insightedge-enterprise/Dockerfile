@@ -4,7 +4,7 @@ ARG JAVA_VERSION=java-11-openjdk
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=16.3.0
-ARG GS_BUILD_NAME=16.3.0-authorization-sso-eks-fix-tue-498
+ARG GS_BUILD_NAME=16.3.0-m11-wed-382
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_URL=https://gs-releases-us-east-1.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
