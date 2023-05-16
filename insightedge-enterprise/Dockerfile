@@ -4,10 +4,10 @@ ARG JAVA_VERSION=java-11-openjdk
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=16.4.0
-ARG GS_BUCKET=gs-releases-us-east-1
-ENV GS_BUCKET $GS_BUCKET
 ARG GS_BUILD_NAME=16.4.0-m1-sun-440
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
+ARG GS_BUCKET=gs-releases-us-east-1
+ENV GS_BUCKET $GS_BUCKET
 ARG GS_URL=https://${GS_BUCKET}.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
