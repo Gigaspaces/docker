@@ -4,13 +4,14 @@ FROM ${BASE_IMAGE}:${BASE_TAG}
 ARG JAVA_VERSION=java-1.8.0-openjdk
 ARG GS_PRODUCT=smart-dih
 ARG GS_VERSION=16.2.0
-ARG GS_BUILD_NAME=16.2.0-RC2
+ARG GS_BUILD_NAME=16.2.0-rc2-build-ng
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
-ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
+ARG GS_BUCKET=gs-releases-us-east-1
+ENV GS_BUCKET $GS_BUCKET
+ARG GS_URL=https://${GS_BUCKET}.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
-ENV KUBERNETES_CLINET_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-java-client-5.0.0.jar
-
+ENV KUBERNETES_CLINET_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-java-client-15.0.1.jar
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 USER root

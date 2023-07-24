@@ -1,11 +1,14 @@
 ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8-alpine
+ARG JAVA_VERSION=java-1.8.0-openjdk
 FROM ${JAVA_IMAGE}:${JAVA_TAG}
 ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=16.2.0
-ARG GS_BUILD_NAME=16.2.0-RC2
+ARG GS_BUILD_NAME=16.2.0-rc2-build-ng
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
-ARG GS_URL=https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
+ARG GS_BUCKET=gs-releases-us-east-1
+ENV GS_BUCKET $GS_BUCKET
+ARG GS_URL=https://${GS_BUCKET}.s3.amazonaws.com/insightedge/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
 
