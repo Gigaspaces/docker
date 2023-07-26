@@ -1,8 +1,9 @@
-ARG BASE_IMAGE=registry.access.redhat.com/ubi8/ubi-minimal
-ARG BASE_TAG=8.4
+ARG BASE_IMAGE=registry.access.redhat.com/ubi8/openjdk-11
+ARG BASE_TAG=1.16-3
 FROM ${BASE_IMAGE}:${BASE_TAG}
-ARG JAVA_VERSION=java-11-openjdk
-ARG GS_PRODUCT=smart-cache
+# The argument below is no longer used. We are moving to ubi8/openjdk-11 image
+# instead of post-install of jdk due to tzdb corruption in upstream repo.
+#ARG JAVA_VERSION=java-11-openjdkARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=16.2.0
 ARG GS_BUILD_NAME=16.2.0-m19-fri-70
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
@@ -17,7 +18,7 @@ WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 USER root
 
-RUN microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip &&\
+RUN microdnf install jq shadow-utils hostname bind-utils nss wget unzip &&\
     wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
