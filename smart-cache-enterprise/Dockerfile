@@ -5,8 +5,8 @@ FROM ${BASE_IMAGE}:${BASE_TAG}
 # instead of post-install of jdk due to tzdb corruption in upstream repo.
 #ARG JAVA_VERSION=java-11-openjdk
 ARG GS_PRODUCT=smart-cache
-ARG GS_VERSION=16.4.0
-ARG GS_BUILD_NAME=16.4.0-PIC-3202-fri-1185
+ARG GS_VERSION=16.5.0
+ARG GS_BUILD_NAME=16.5.0-PIC-3202-mon-1186
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_BUCKET=gs-releases-us-east-1
 ENV GS_BUCKET $GS_BUCKET
