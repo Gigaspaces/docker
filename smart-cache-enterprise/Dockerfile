@@ -19,7 +19,14 @@ WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 USER root
 
-RUN microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip &&\
+RUN microdnf upgrade \
+    --refresh \
+    --best \
+    --nodocs \
+    --noplugins \
+    --setopt=install_weak_deps=0 &&\
+    microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip &&\
+    microdnf clean all &&\
     wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
