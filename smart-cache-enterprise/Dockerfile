@@ -6,7 +6,7 @@ FROM ${BASE_IMAGE}:${BASE_TAG}
 ARG JAVA_VERSION=java-11-openjdk-headless
 ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=16.5.0
-ARG GS_BUILD_NAME=16.5.0-dev-sagiv-sapir-prepare-statement-thu-1254
+ARG GS_BUILD_NAME=16.5.0-support-lpad-function-thu-1256
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_BUCKET=gs-releases-us-east-1
 ENV GS_BUCKET $GS_BUCKET
