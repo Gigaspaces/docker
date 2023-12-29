@@ -1,11 +1,11 @@
-ARG BASE_IMAGE=registry.access.redhat.com/ubi8/openjdk-11
+ARG BASE_IMAGE=registry.access.redhat.com/ubi8/openjdk-17
 ARG BASE_TAG=1.16-3
 FROM ${BASE_IMAGE}:${BASE_TAG}
 # The argument below is no longer used. We are moving to ubi8/openjdk-11 image
 # instead of post-install of jdk due to tzdb corruption in upstream repo.
 #ARG JAVA_VERSION=java-11-openjdkARG GS_PRODUCT=smart-cache
-ARG GS_VERSION=16.2.0
-ARG GS_BUILD_NAME=16.2.0-m19-fri-70
+ARG GS_VERSION=16.5.0
+ARG GS_BUILD_NAME=16.5.0-m19-fri-70
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_BUCKET=gs-releases-us-east-1
 ENV GS_BUCKET $GS_BUCKET
