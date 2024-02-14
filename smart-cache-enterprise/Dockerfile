@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=registry.access.redhat.com/ubi8-minimal
+ARG BASE_IMAGE=registry.access.redhat.com/ubi9-minimal
 ARG BASE_TAG=latest
 FROM ${BASE_IMAGE}:${BASE_TAG}
 # The argument below is no longer used. We are moving to ubi8/openjdk-11 image
