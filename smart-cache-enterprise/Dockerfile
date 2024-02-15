@@ -6,14 +6,14 @@ FROM ${BASE_IMAGE}:${BASE_TAG}
 ARG JAVA_VERSION=java-17-openjdk-headless
 ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=16.5.0
-ARG GS_BUILD_NAME=16.5.0-PIC-3414-fri-1258
+ARG GS_BUILD_NAME=16.5.0-jdk17-ci-475
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_BUCKET=gs-releases-us-east-1
 ENV GS_BUCKET $GS_BUCKET
 ARG GS_URL=https://${GS_BUCKET}.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
-ENV KUBERNETES_CLIENT_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-java-client-15.0.1.jar
+ENV KUBERNETES_CLIENT_URL=https://repo1.maven.org/maven2/io/kubernetes/client-java/20.0.0/client-java-20.0.0.jar
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
@@ -24,9 +24,10 @@ RUN microdnf upgrade \
     --best \
     --nodocs \
     --noplugins \
+    --assumeyes \
     --setopt=install_weak_deps=0 &&\
-    microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip &&\
-    microdnf clean all &&\
+    microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip --assumeyes &&\
+    microdnf clean all --assumeyes &&\
     wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
