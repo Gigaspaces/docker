@@ -6,7 +6,7 @@ FROM ${BASE_IMAGE}:${BASE_TAG}
 ARG JAVA_VERSION=java-17-openjdk-headless
 ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=16.5.0
-ARG GS_BUILD_NAME=16.5.0-jdk17-ci-475
+ARG GS_BUILD_NAME=16.5.0-jdk17-ci-479
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_BUCKET=gs-releases-us-east-1
 ENV GS_BUCKET $GS_BUCKET
@@ -14,6 +14,7 @@ ARG GS_URL=https://${GS_BUCKET}.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${G
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
 ENV KUBERNETES_CLIENT_URL=https://repo1.maven.org/maven2/io/kubernetes/client-java/20.0.0/client-java-20.0.0.jar
+ENV KUBERNETES_CLIENT_API_URL=https://repo1.maven.org/maven2/io/kubernetes/client-java-api/20.0.0/client-java-api-20.0.0.jar
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
@@ -33,12 +34,14 @@ RUN microdnf upgrade \
     mkdir -p ${GS_HOME}/work &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
     rm -f /tmp/gigaspaces.zip &&\
+    wget ${KUBERNETES_CLIENT_API_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client-api.jar &&\
     wget ${KUBERNETES_CLIENT_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar &&\
     echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill &&\
     groupadd --gid 2000 --system gs_group &&\
     adduser -g gs_group -s /bin/nologin -u 1000 gs_user &&\
     chown -R gs_user:0 ${GS_HOME}
 ADD entrypoint.sh /opt/entrypoint.sh
+
 
 # Configure and expose ports
 ENV LD_LIBRARY_PATH "/lib:/lib64"
