@@ -1,7 +1,7 @@
 ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8-alpine
 ARG JAVA_VERSION=java-11-openjdk
-FROM ${JAVA_IMAGE}:${JAVA_TAG}
+FROM gigaspaces/openjdk11.1
 ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=16.2.0
 ARG GS_BUILD_NAME=16.2.0-m19-fri-70
