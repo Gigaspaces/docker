@@ -14,8 +14,7 @@ ENV GS_PRODUCT ${GS_PRODUCT}
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
-RUN apk --no-cache add openssl wget unzip &&\
-    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
+RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME} &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\

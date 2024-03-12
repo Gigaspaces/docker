@@ -16,10 +16,9 @@ ENV KUBERNETES_CLINET_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-j
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
-USER root
+USER gsods
 
-RUN microdnf install jq shadow-utils hostname bind-utils nss wget unzip &&\
-    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
+RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
