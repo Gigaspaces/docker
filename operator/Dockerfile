@@ -1,11 +1,7 @@
-ARG BASE_IMAGE=registry.access.redhat.com/ubi8/openjdk-11
-ARG BASE_TAG=1.16-3
-FROM gigaspaces/openjdk11.1
-# The argument below is no longer used. We are moving to ubi8/openjdk-11 image
-# instead of post-install of jdk due to tzdb corruption in upstream repo.
-#ARG JAVA_VERSION=java-11-openjdkARG GS_PRODUCT=smart-cache
-ARG GS_VERSION=16.2.0
-ARG GS_BUILD_NAME=16.2.0-m19-fri-70
+FROM gigaspaces/openjdk:11.1
+ARG GS_VERSION=16.4.1
+ARG GS_BUILD_NAME=16.4.1
+ARG GS_PRODUCT=smart-cache
 ARG GS_NAME=gigaspaces-${GS_PRODUCT}-enterprise-${GS_BUILD_NAME}
 ARG GS_BUCKET=gs-releases-us-east-1
 ENV GS_BUCKET $GS_BUCKET
@@ -16,7 +12,7 @@ ENV KUBERNETES_CLINET_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-j
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
-USER gsods
+USER root
 
 RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
@@ -45,9 +41,9 @@ ENV GS_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
 EXPOSE ${GS_MULTICAST_LOOKUP_PORT} ${GS_LRMI_PORT} ${GS_WEBUI_PORT} ${GS_MANAGER_REST_PORT} ${GS_WEBUI_PORT} ${GS_WEBSTER_HTTP_PORT} ${GS_RMI_REGISTRY_PORT} ${GS_REST_PORT} ${GS_ZOOKEEPER_CLIENT_PORT} ${GS_MANAGER_ZOOKEEPER_DISCOVERY_PORT}  ${GS_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT}
 
 
-RUN groupadd --gid 2000 --system gs_group &&\
-    adduser -g gs_group -s /bin/nologin -u 1000 gs_user &&\
-    chown -R gs_user:0 ${GS_HOME}
+RUN groupadd --gid 2000 --system gs_group
+RUN adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user
+RUN chown -R gs_user:0 ${GS_HOME}
 
 USER gs_user
 
