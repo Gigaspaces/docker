@@ -1,9 +1,6 @@
-ARG BASE_IMAGE=registry.access.redhat.com/ubi8-minimal
-ARG BASE_TAG=latest
-FROM ${BASE_IMAGE}:${BASE_TAG}
+FROM gigaspaces/openjdk:11.1
 # The argument below is no longer used. We are moving to ubi8/openjdk-11 image
 # instead of post-install of jdk due to tzdb corruption in upstream repo.
-ARG JAVA_VERSION=java-11-openjdk-headless
 ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=16.5.0
 ARG GS_BUILD_NAME=16.5.0-PIC-3414-fri-1258
@@ -19,23 +16,15 @@ WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 USER root
 
-RUN microdnf upgrade \
-    --refresh \
-    --best \
-    --nodocs \
-    --noplugins \
-    --setopt=install_weak_deps=0 &&\
-    microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip &&\
-    microdnf clean all &&\
-    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
+RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
     rm -f /tmp/gigaspaces.zip &&\
     wget ${KUBERNETES_CLIENT_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar &&\
-    echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill &&\
-    groupadd --gid 2000 --system gs_group &&\
-    adduser -g gs_group -s /bin/nologin -u 1000 gs_user &&\
+    echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill
+RUN groupadd --gid 2000 --system gs_group &&\
+    adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user &&\
     chown -R gs_user:0 ${GS_HOME}
 ADD entrypoint.sh /opt/entrypoint.sh
 
