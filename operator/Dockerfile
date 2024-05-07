@@ -18,8 +18,7 @@ WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 USER root
 
-RUN microdnf install jq shadow-utils hostname bind-utils nss wget unzip &&\
-    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
+RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
@@ -46,9 +45,9 @@ ENV GS_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT=3888
 EXPOSE ${GS_MULTICAST_LOOKUP_PORT} ${GS_LRMI_PORT} ${GS_WEBUI_PORT} ${GS_MANAGER_REST_PORT} ${GS_WEBUI_PORT} ${GS_WEBSTER_HTTP_PORT} ${GS_RMI_REGISTRY_PORT} ${GS_REST_PORT} ${GS_ZOOKEEPER_CLIENT_PORT} ${GS_MANAGER_ZOOKEEPER_DISCOVERY_PORT}  ${GS_MANAGER_ZOOKEEPER_LEADER_ELECTION_PORT}
 
 
-RUN groupadd --gid 2000 --system gs_group &&\
-    adduser -g gs_group -s /bin/nologin -u 1000 gs_user &&\
-    chown -R gs_user:0 ${GS_HOME}
+RUN groupadd --gid 2000 --system gs_group
+RUN adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user
+RUN chown -R gs_user:0 ${GS_HOME}
 
 USER gs_user
 

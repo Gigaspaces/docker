@@ -1,7 +1,7 @@
 ARG JAVA_IMAGE=openjdk
 ARG JAVA_TAG=8-alpine
 ARG JAVA_VERSION=java-11-openjdk
-FROM ${JAVA_IMAGE}:${JAVA_TAG}
+FROM gigaspaces/openjdk11.1
 ARG GS_PRODUCT=insightedge
 ARG GS_VERSION=16.2.0
 ARG GS_BUILD_NAME=16.2.0-m19-fri-70
@@ -14,8 +14,7 @@ ENV GS_PRODUCT ${GS_PRODUCT}
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
-RUN apk --no-cache add openssl wget unzip &&\
-    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
+RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME} &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\

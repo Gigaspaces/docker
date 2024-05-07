@@ -34,14 +34,12 @@ RUN microdnf upgrade \
     mkdir -p ${GS_HOME}/work &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
     rm -f /tmp/gigaspaces.zip &&\
-    wget ${KUBERNETES_CLIENT_API_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client-api.jar &&\
     wget ${KUBERNETES_CLIENT_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar &&\
-    echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill &&\
-    groupadd --gid 2000 --system gs_group &&\
-    adduser -g gs_group -s /bin/nologin -u 1000 gs_user &&\
+    echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill
+RUN groupadd --gid 2000 --system gs_group &&\
+    adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user &&\
     chown -R gs_user:0 ${GS_HOME}
 ADD entrypoint.sh /opt/entrypoint.sh
-
 
 # Configure and expose ports
 ENV LD_LIBRARY_PATH "/lib:/lib64"
