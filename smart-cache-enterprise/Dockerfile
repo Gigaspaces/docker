@@ -11,6 +11,7 @@ ARG GS_URL=https://${GS_BUCKET}.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${G
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
 ENV KUBERNETES_CLIENT_URL=https://resources.gigaspaces.com/k8s-java-client/k8s-java-client-15.0.1.jar
+ENV KUBERNETES_CLIENT_API_URL=https://repo1.maven.org/maven2/io/kubernetes/client-java-api/20.0.0/client-java-api-20.0.0.jar
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
