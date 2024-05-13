@@ -35,6 +35,7 @@ RUN microdnf upgrade \
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
     rm -f /tmp/gigaspaces.zip &&\
     wget ${KUBERNETES_CLIENT_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar &&\
+    wget ${KUBERNETES_CLIENT_API_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client-api.jar &&\
     echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill
 RUN groupadd --gid 2000 --system gs_group &&\
     adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user &&\
