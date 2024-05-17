@@ -13,8 +13,7 @@ ENV GS_BUCKET $GS_BUCKET
 ARG GS_URL=https://${GS_BUCKET}.s3.amazonaws.com/${GS_PRODUCT}/${GS_VERSION}/${GS_NAME}.zip
 ENV GS_HOME /opt/gigaspaces
 ENV GS_PRODUCT ${GS_PRODUCT}
-ENV KUBERNETES_CLIENT_URL=https://repo1.maven.org/maven2/io/kubernetes/client-java/20.0.0/client-java-20.0.0.jar
-ENV KUBERNETES_CLIENT_API_URL=https://repo1.maven.org/maven2/io/kubernetes/client-java-api/20.0.0/client-java-api-20.0.0.jar
+ENV KUBERNETES_CLINET_URL=https://s3.amazonaws.com/resources.gigaspaces.com/k8s-java-client/k8s-java-client.jar
 
 WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
@@ -34,8 +33,7 @@ RUN microdnf upgrade \
     mkdir -p ${GS_HOME}/work &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
     rm -f /tmp/gigaspaces.zip &&\
-    wget ${KUBERNETES_CLIENT_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar &&\
-    wget ${KUBERNETES_CLIENT_API_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client-api.jar &&\
+    wget ${KUBERNETES_CLINET_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar &&\
     echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill
 RUN groupadd --gid 2000 --system gs_group &&\
     adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user &&\
