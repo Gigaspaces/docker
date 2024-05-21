@@ -3,7 +3,7 @@ ARG BASE_TAG=17.1
 FROM ${BASE_IMAGE}:${BASE_TAG}
 # The argument below is no longer used. We are moving to ubi8/openjdk-11 image
 # instead of post-install of jdk due to tzdb corruption in upstream repo.
-ARG JAVA_VERSION=java-17-openjdk-headless
+ARG JAVA_VERSION=openjdk-17-jdk-headless
 ARG GS_PRODUCT=smart-cache
 ARG GS_VERSION=17.0.0
 ARG GS_BUILD_NAME=17.0.0-jdk17-ci-479
@@ -19,16 +19,9 @@ WORKDIR ${GS_HOME}
 # Download $GS_URL and unzip to $GS_HOME
 USER root
 
-RUN microdnf upgrade \
-    --refresh \
-    --best \
-    --nodocs \
-    --noplugins \
-    --assumeyes \
-    --setopt=install_weak_deps=0 &&\
-    microdnf install $JAVA_VERSION jq shadow-utils hostname bind-utils nss wget unzip --assumeyes &&\
-    microdnf clean all --assumeyes &&\
-    wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
+RUN apt-get update && \
+    apt-get install -y $JAVA_VERSION jq bind9-utils wget unzip    
+RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     unzip -q /tmp/gigaspaces.zip -d /tmp &&\
     mkdir -p ${GS_HOME}/work &&\
     mv /tmp/${GS_NAME}/* ${GS_HOME}/ &&\
