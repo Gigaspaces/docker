@@ -31,7 +31,7 @@ RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
 RUN groupadd --gid 2000 --system gs_group &&\
     adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user &&\
     chown -R gs_user:0 ${GS_HOME}
-ADD entrypoint.sh /opt/entrypoint.sh
+COPY --chmod=755 scripts/entrypoint.sh /opt/entrypoint.sh
 
 # Configure and expose ports
 ENV LD_LIBRARY_PATH "/lib:/lib64"
