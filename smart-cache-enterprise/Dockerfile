@@ -30,8 +30,10 @@ RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill
 RUN groupadd --gid 2000 --system gs_group &&\
     adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user &&\
-    chown -R gs_user:0 ${GS_HOME}
-ADD entrypoint.sh /opt/entrypoint.sh
+    chown -R gs_user:0 ${GS_HOME} &&\
+    chmod -R 0775 /opt/gigaspaces
+
+COPY --chmod=075 entrypoint.sh /opt/entrypoint.sh
 
 # Configure and expose ports
 ENV LD_LIBRARY_PATH "/lib:/lib64"
