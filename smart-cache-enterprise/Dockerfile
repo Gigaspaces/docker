@@ -28,10 +28,13 @@ RUN wget --progress=bar:force -O /tmp/gigaspaces.zip ${GS_URL} &&\
     rm -f /tmp/gigaspaces.zip &&\
     wget ${KUBERNETES_CLINET_URL} -O ${GS_HOME}/tools/kubernetes/lib/k8s-java-client.jar &&\
     echo "#!/bin/bash" > /bin/kill && echo "kill \$@" >> /bin/kill && chmod +x /bin/kill
+
+COPY --chmod=775 entrypoint.sh /opt/entrypoint.sh
 RUN groupadd --gid 2000 --system gs_group &&\
     adduser --shell /bin/nologin --uid 2001 --gid 2000 gs_user &&\
-    chown -R gs_user:0 ${GS_HOME}
-ADD entrypoint.sh /opt/entrypoint.sh
+    chown -R gs_user:0 ${GS_HOME} &&\
+    chmod -R 775 /opt/gigaspaces
+
 
 # Configure and expose ports
 ENV LD_LIBRARY_PATH "/lib:/lib64"
