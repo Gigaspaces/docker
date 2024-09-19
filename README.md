@@ -1,6 +1,6 @@
 ![DockerHub-CI](https://github.com/Gigaspaces/docker/workflows/DockerHub-CI/badge.svg)
 
-**NOTE -All docker files dockerfiles were moved to xap-premium repo (from 17.0.2). This repo is used only if we need to patch older versions**
+**NOTE -All dockerfiles were moved to xap-premium repo (from 17.0.2). This repo is used only if we need to patch older versions**
 
 
 ##  GigaSpaces Docker Images.
